@@ -30,3 +30,6 @@ Deskripi : aplikasi berbagi file
 - homepage
 - login
 - register
+
+# Preview
+![alt Preview](https://github.com/irfanykywz-php-project/157-muhamad-irfan/blob/main/preview.png?raw=true)
