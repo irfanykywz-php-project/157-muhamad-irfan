@@ -12,29 +12,37 @@
                     </div>
                     <ul class="list-group list-group-flush">
 
-                        @for ($i = 0; $i <= 10; $i++)
+                        @foreach($files as $file)
                             <li class="list-group-item">
 
                                 <div class="d-flex align-items-center">
                                     <i class="bi bi-inbox me-2"></i>
-                                    <a class="fs- text-decoration-none" href="/file">
-                                        Files Name
+                                    <a class="fs- text-decoration-none" href="{{ url($file->code) }}">
+                                        {{ $file->name }}
                                     </a>
                                 </div>
                                 <div class="d-flex">
-                                    <span class="me-2">3551KB</span>
-                                    <span>Uploaded: 13-May-2022</span>
+                                    <span class="me-2">{{ ReadableSize($file->size) }}</span>
+                                    <span>Uploaded: {{ ReadableDate($file->created_at) }}</span>
                                 </div>
 
                             </li>
-                        @endfor
+                        @endforeach
 
                     </ul>
                     <div class="border-bottom">
-                        pagination
+                        <div class="m-3 mb-0">
+                            {{ $files->onEachSide(0)->links() }}
+                        </div>
                     </div>
-                    <div>
-                        jump to
+                    <div class="m-3">
+                        <form class="" action="{{ route('trending') }}" method="GET">
+                            <div class="d-flex gap-1">
+                                <label for="">Jump: </label>
+                                <input type="text" name="files" required value="{{ request()->get('files') }}"/>
+                                <input type="submit" value="Go"/>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

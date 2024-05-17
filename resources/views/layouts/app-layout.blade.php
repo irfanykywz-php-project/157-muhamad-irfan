@@ -1,3 +1,9 @@
+@props([
+    'title',
+    'removeheader',
+    'removefooter',
+])
+
 <!DOCTYPE html>
 <html class="h-100" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -15,21 +21,25 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
 
+    <!-- turbo -->
+    <meta name="turbo-cache-control" content="no-cache">
+    <meta name="turbo-prefetch" content="false">
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
 <body class="d-flex flex-column h-100">
 
-    @if(!@isset($removeheader))
-        @include('components.app-layout.header')
-    @endif
+@if(!@isset($removeheader))
+    @include('layouts.app-layout.header')
+@endif
 
-    {{ $slot }}
+{{ $slot }}
 
-    @if(!@isset($removefooter))
-        @include('components.app-layout.footer')
-    @endif
+@if(!@isset($removefooter))
+    @include('layouts.app-layout.footer')
+@endif
 
 </body>
 </html>

@@ -2,89 +2,49 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function (){
-    return view('home');
-})->name('home');
+// home
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// upload
+Route::post('/upload', [\App\Http\Controllers\HomeController::class, 'upload'])->name('upload');
 
 // latest
-Route::get('/latest', function (){
-    return view('latest');
-})->name('latest');
+Route::get('/latest', [\App\Http\Controllers\LatestController::class, 'index'])->name('latest');
 
 // trending
-Route::get('/trending', function (){
-    return view('trending');
-})->name('trending');
-
-// upload
-Route::get('/upload', function (){
-    return view('upload');
-})->name('upload');
-Route::post('/upload', function (){
-    // TODO upload process
-});
+Route::get('/trending', [\App\Http\Controllers\TrendingController::class, 'index'])->name('trending');
 
 // search
-Route::get('/search', function (){
-    return view('search');
-})->name('search');
-
-// file download
-Route::get('/download/{file}', function ($file){
-    return view('download');
-})->name('download');
-
-// user public
-Route::prefix('/user/{name}')->group(function (){
-    Route::get('/', function (){
-        return view('user-public');
-    })->name('user.public');
-    Route::get('/files', function (){
-        return view('user-files');
-    })->name('user.files');
-})->name('user');
+Route::get('/search', [\App\Http\Controllers\SearchController::class, 'index'])->name('search');
 
 // category by extension
-Route::get('/category/{category}', function ($category){
-    return view('category');
-})->name('category');
-
-// auth
-Route::get('/login', function (){
-    return view('auth.login');
-})->name('login');
-Route::post('/login', function (){
-    // TODO login process
-});
-Route::get('/register', function (){
-    return view('auth.register');
-})->name('register');
-Route::post('/register', function (){
-    // TODO register process
-});
-Route::get('/logout', function (){
-    // TODO logout
-})->name('logout');
+Route::get('/category/{category}', [\App\Http\Controllers\CategoryController::class, 'index'])->name('category');
 
 // page
-Route::get('/p/{page}', function ($page){
-    return view("page/{$page}");
-});
+Route::get('/p/{page}', [\App\Http\Controllers\PageController::class, 'index']);
 
-// auth page
+// auth
+Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('login');
+Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'authenticate']);
+Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('register');
+Route::post('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'process']);
+Route::get('/logout', [\App\Http\Controllers\Auth\LogoutController::class, 'process'])->name('logout');
+
+// user auth page
 Route::middleware(['auth', 'auth.session'])->group(function () {
     // files
-    Route::get('/files', function (){
-        return view('user.files');
-    })->name('files');
+    Route::get('/files', [\App\Http\Controllers\User\FilesController::class, 'index'])->name('user.files');
 
     // profile
-    Route::get('/profile', function (){
-        return view('user.profile');
-    })->name('profile');
+    Route::get('/profile', [\App\Http\Controllers\User\ProfileController::class, 'index'])->name('user.profile');
 });
 
+// user public page
+Route::get('/user/{username}', [\App\Http\Controllers\User\ProfilePublicController::class, 'index'])->name('public.profile');
+Route::get('/user/{username}/files', [\App\Http\Controllers\user\FilesPublicController::class, 'index'])->name('public.files');
+
+// file download
+Route::get('/download/{code}', [\App\Http\Controllers\DownloadController::class, 'index'])->name('download');
+Route::get('/download/{code}/start', [\App\Http\Controllers\DownloadController::class, 'download']);
+
 // file detail
-Route::get('/{file}', function ($file){
-    return view('file');
-})->name('file');
+Route::get('/{code}', [\App\Http\Controllers\FileController::class, 'index'])->name('file');

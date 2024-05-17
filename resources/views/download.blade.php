@@ -21,7 +21,7 @@
                         </p>
 
                         <div class="text-center">
-                            <a class="btn btn-primary" href="download/file">
+                            <a class="btn btn-primary" href="{{ url('download/'. encrypt($file['code']) .'/start') }}" data-turbo="false">
                                 Download File (444 bytes)
                             </a>
                         </div>
