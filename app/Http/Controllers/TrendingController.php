@@ -9,8 +9,8 @@ class TrendingController extends Controller
 {
     public function index(){
         $files = DB::table('files')
-            ->orderBy('viewed', 'DESC')
-//            ->orderBy('created_at', 'DESC')
+            ->whereDate('created_at', '>', now()->subDays(7))
+            ->orderByRaw('CONVERT(viewed, SIGNED) DESC')
             ->paginate(
                 $perPage = 8, $columns = ['name', 'size', 'ext', 'code', 'created_at'], $pageName = 'files'
             );

@@ -1,4 +1,4 @@
-<x-app-layout title="Latest - {{ config('app.name') }}">
+<x-app-layout title="Latest">
 
 <div class="container mt-2 mb-auto">
     <div class="row justify-content-center">
@@ -30,20 +30,22 @@
                     @endforeach
 
                 </ul>
-                <div class="border-bottom">
-                    <div class="m-3 mb-0">
-                        {{ $files->onEachSide(0)->links() }}
-                    </div>
-                </div>
-                <div class="m-3">
-                    <form class="" action="{{ route('latest') }}" method="GET">
-                        <div class="d-flex gap-1">
-                            <label for="">Jump: </label>
-                            <input type="text" name="files" required value="{{ request()->get('files') }}"/>
-                            <input type="submit" value="Go"/>
+                @if($files->hasPages())
+                    <div class="border-bottom">
+                        <div class="m-3 mb-0">
+                            {{ $files->onEachSide(0)->links() }}
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="m-3">
+                        <form class="" action="{{ route('latest') }}" method="GET">
+                            <div class="d-flex gap-1">
+                                <label for="">Jump: </label>
+                                <input type="text" name="files" required value="{{ request()->get('files') }}"/>
+                                <input type="submit" value="Go"/>
+                            </div>
+                        </form>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

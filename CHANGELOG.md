@@ -1,4 +1,13 @@
 # ChangeLog
+**21 Mei 2024**
+- migration [payment, files, roles, downloaded]
+- seeder [files, role, user]
+- auth login, register [view]
+- process user profile [view]
+- process user files [delete, edit]
+- member payment page
+- search page
+
 **17 Mei 2024**
 - refactory routes move to controller
 - add migration files

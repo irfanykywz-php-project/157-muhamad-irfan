@@ -10,13 +10,14 @@ class LogoutController extends Controller
 {
 
     public function process(Request $request){
+
         Auth::logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('login');
     }
 
 }

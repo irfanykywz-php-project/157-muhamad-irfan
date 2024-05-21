@@ -36,7 +36,7 @@ class HomeController extends Controller
 
         // save
         Files::create([
-            'user_id' => Auth::check() ? Auth::id() : 0, // 0 = guest user
+            'user_id' => Auth::check() ? Auth::id() : 2, // 2 = guest user
             'name' => $file->getClientOriginalName(),
             'ext' => $file->extension(),
             'size' => $file->getSize(),

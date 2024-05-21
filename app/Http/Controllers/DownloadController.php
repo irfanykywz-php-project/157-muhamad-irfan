@@ -23,6 +23,11 @@ class DownloadController extends Controller
     {
         $file = Files::where('code', decrypt($code))->firstOrFail();
 
-        return Storage::download($file['path'], $file['name']);
+        if (Storage::fileExists($file['path'])){
+            return Storage::download($file['path'], $file['name']);
+        }else{
+            return view('download-error');
+        }
+
     }
 }

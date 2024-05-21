@@ -20,16 +20,25 @@ Deskripi : aplikasi berbagi file
    - npm run build
    - composer install
    - php artisan migrate
+   - php artisan db:seed
    - php artisan key:generate
    - php artisan serve
 4. Open http://localhost:8000
 
-# TODO
-- profile
-- file list
-- homepage
-- login
-- register
+# Login
+```
+# admin
+email: admin@admin.com
+pass: 1234
+
+# guest
+email: guest@guest.com
+pass: 1234
+
+# user
+email: user@user.com
+pass: 1234
+```
 
 # Preview
 ![alt Preview](https://github.com/irfanykywz-php-project/157-muhamad-irfan/blob/main/preview.png?raw=true)

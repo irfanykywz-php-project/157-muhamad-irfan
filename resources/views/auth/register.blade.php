@@ -1,40 +1,98 @@
 <x-app-layout title="Register">
 
-    <div class="m-auto">
+    <div class="container mt-2 mb-auto">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10">
+                <div class="card rounded-0 mb-3">
+                    <div class="card-header rounded-0 bg-primary">
+                        <h1 class="fs-3 text-white">
+                            <i class="bi bi-person-add"></i>
+                            Register
+                        </h1>
+                    </div>
 
-        <h1 class="fs-3 border-bottom text-center mb-3 pb-3">
-            Register
-        </h1>
+                    <div class="card-body">
 
-        <form action="/register" method="post">
+                        <form class="row justify-content-center" action="{{ route('register') }}" method="POST">
 
-            @csrf
+                            <div class="col-12 col-md-4">
+                                @csrf
 
-            <div class="mb-3">
-                <label for="">name</label>
-                <input class="form-control" type="text" name="name">
+                                <div class="mb-3">
+                                    <input class="form-control" type="text" name="name" value="{{ old('name') }}" placeholder="Name">
+                                    @error('name')
+                                    <span class="form-text text-danger">
+                                        {{ $errors->first('name')  }}
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <input class="form-control" type="text" name="email" value="{{ old('email') }}" placeholder="Valid Email">
+                                    @error('email')
+                                    <span class="form-text text-danger">
+                                        {{ $errors->first('email')  }}
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <input class="form-control" type="password" name="password" placeholder="Create a password">
+                                    @error('password')
+                                    <span class="form-text text-danger">
+                                        {{ $errors->first('password')  }}
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3 text-center">
+                                    <input class="form-check-input" type="checkbox" name="checklist" id="checklist">
+                                    <label for="checklist">
+                                        I'm not a robot
+                                    </label>
+                                    @error('checklist')
+                                    <span class="form-text text-danger d-block">
+                                        {{ $errors->first('checklist')  }}
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-1">
+                                    <button class="btn btn-primary w-100" type="submit">Sign Up</button>
+                                </div>
+
+                                <div class="my-3 text-center">
+                                    OR
+                                </div>
+
+                                <div>
+                                    <img src="{{ asset('assets/Google-login-btn-r7.svg') }}" alt="google">
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="mt-3 text-center">
+
+                    <div class="mb-3">
+                        Creating an account means you’re okay with Sfile's
+                        <a href="{{ url('p/terms') }}">Terms of Service</a> &
+                        <a href="{{ url('p/privacy') }}">Privacy Policy</a>
+                    </div>
+
+                    <div class="">
+                        Have account?
+                        <a class="text-decoration-none" href="{{ route('login') }}">Login!</a>
+                    </div>
+
+                </div>
+
             </div>
-
-            <div class="mb-3">
-                <label for="">email</label>
-                <input class="form-control" type="text" name="email">
-            </div>
-
-            <div class="mb-3">
-                <label for="">password</label>
-                <input class="form-control" type="text" name="password">
-            </div>
-
-            <div class="mb-1">
-                <button class="btn btn-primary" type="submit">Submit</button>
-            </div>
-
-            <div class="text-end">
-                <a href="{{ route('login') }}">Login</a>
-            </div>
-
-        </form>
-
+        </div>
     </div>
 
 </x-app-layout>

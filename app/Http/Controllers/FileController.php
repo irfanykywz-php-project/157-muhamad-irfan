@@ -12,16 +12,7 @@ class FileController extends Controller
     {
 
         $file = $file->where('code', $code)->firstOrFail();
-
-        // check id_user
-        // if id_user not 0 is a registerd user
-        if ($file['id_user'] > 0) {
-            $user = User::where('id', $file['id_user'])->firstOrFail();
-        }else{
-            $user = [
-                'name' => 'guest'
-            ];
-        }
+        $user = User::where('id', $file['user_id'])->firstOrFail();
 
         // viewed increment
         $file->viewedIncrement();

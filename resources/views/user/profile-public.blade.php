@@ -1,4 +1,4 @@
-<x-app-layout title="User Profile - {{ config('app.name') }}">
+<x-app-layout title="{{ $user['name'] }}'s Profile">
 
     <div class="container mt-2 mb-auto">
         <div class="row justify-content-center">
@@ -7,7 +7,7 @@
                     <div class="card-header rounded-0 bg-primary">
                         <h1 class="fs-3 text-white">
                             <i class="bi bi-person"></i>
-                            User Profile
+                            {{ $user['name'] }}'s Profile
                         </h1>
                     </div>
                     <ul class="list-group list-group-flush">
@@ -16,16 +16,19 @@
                             <img width="75" src="https://sfile.mobi/images/profil/user68151_1642584459.png" alt="profile">
                         </li>
                         <li class="list-group-item">
-                            Name: username
+                            Name: <b>{{ $user['name'] }}</b>
                         </li>
                         <li class="list-group-item">
-                            Level: Trusted User
+                            Level: <b>New User</b>
                         </li>
                         <li class="list-group-item">
-                            Total Downloaded: 1903
+                            Total Downloaded: <b>{{ $total_download }}</b>
                         </li>
                         <li class="list-group-item">
-                            User Uploads: <a href="{{ url('/user/username/files') }}">333</a>
+                            {{ $user['name'] }}'s Uploads:
+                            <a class="text-decoration-none fw-bold" href="{{ route('public.files', [$user['name']]) }}">
+                                {{ $total_files }}
+                            </a>
                         </li>
 
                     </ul>

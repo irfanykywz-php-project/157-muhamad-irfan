@@ -12,4 +12,16 @@ class ProfileController extends Controller
         return view('user.profile', [
         ]);
     }
+
+    public function edit()
+    {
+        //
+        return view('user.profile-edit', [
+        ]);
+    }
+
+    public function update()
+    {
+        return view('user.profile-edit')->with('message', 'success update profile!');
+    }
 }

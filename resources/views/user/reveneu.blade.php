@@ -1,0 +1,60 @@
+<x-app-layout title="My Reveneu">
+
+    <div class="container mt-2 mb-auto">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10">
+
+                <div class="bg-primary d-flex align-items-center text-white py-2">
+                    <div class="px-3">
+                        <i class="bi bi-person-circle fs-2"></i>
+                    </div>
+                    <div>
+                        <h1 class="fs-3">
+                            {{ auth()->user()->name }}'s Reveneu
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="card my-3">
+
+                    <div class="card-header rounded-0 bg-primary">
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div>
+                                Your Revenue:
+                                <b>Rp. 0</b>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="my-3 text-white px-3 py-1" style="background: #3f51b5">
+                    <h2 class="fs-6 mb-0">Reveneu Detail</h2>
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="background: #3f51b5;color: #fff;font-size: 12px">Date</th>
+                            <th style="background: #3f51b5;color: #fff;font-size: 12px">Download</th>
+                            <th style="background: #3f51b5;color: #fff;font-size: 12px">Reveneu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</x-app-layout>

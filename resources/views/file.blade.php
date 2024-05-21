@@ -1,4 +1,4 @@
-<x-app-layout title="{{ config('app.name') }}">
+<x-app-layout title="{{ $file['name'] }}">
 
     <div class="container mt-2 mb-auto">
         <div class="row justify-content-center">
@@ -50,7 +50,11 @@
                             Download {{ $file['name'] }} by {{ $user['name'] }}
                         </p>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ea maxime repellendus totam vitae? Alias aliquid atque blanditiis dignissimos distinctio dolor impedit laboriosam laudantium optio quasi, repellat saepe sint voluptatem.
+                            @if($file['description'])
+                                {{ $file['description'] }}
+                            @else
+                                Sfile.mobi is a free file-sharing site. 5GB of free cloud server storage space, a high-speed, dedicated server for upload and download.
+                            @endif
                         </p>
                     </div>
 

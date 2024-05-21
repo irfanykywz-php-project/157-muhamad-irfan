@@ -11,17 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('files', function(Blueprint $table){
+        Schema::create('payment', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('name');
-            $table->string('size');
-            $table->string('ext');
-            $table->string('path');
-            $table->integer('downloaded')->default(0);
-            $table->integer('viewed')->default(0);
-            $table->string('code')->unique();
-            $table->string('description')->nullable();
+            $table->integer('total');
+            $table->enum('method', ['Bank', 'Digital Wallet']);
+            $table->string('destination');
+            $table->enum('status', ['success', 'reject', 'pending']);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('payment');
     }
 };

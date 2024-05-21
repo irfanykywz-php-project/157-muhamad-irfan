@@ -1,45 +1,90 @@
 <x-app-layout title="Login">
 
-    <div class="m-auto">
+    <div class="container mt-2 mb-auto">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10">
+                <div class="card rounded-0 mb-3">
+                    <div class="card-header rounded-0 bg-primary">
+                        <h1 class="fs-3 text-white">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            Login
+                        </h1>
+                    </div>
 
-        <h1 class="fs-3 border-bottom text-center mb-3 pb-3">
-            Login
-        </h1>
+                    <div class="card-body">
 
-        <form action="/login" method="post">
+                        <form class="row justify-content-center" action="{{ route('login') }}" method="POST">
 
-            @csrf
+                           <div class="col-12 col-md-4">
+                               @csrf
 
-            @error('invalid')
-            {{ $errors->first('invalid')  }}
-            @enderror
+                               @error('invalid')
+                               <div class="alert alert-danger">
+                                   {{ $errors->first('invalid')  }}
+                               </div>
+                               @enderror
 
-            <div class="mb-3">
-                <label for="">email</label>
-                <input class="form-control" type="text" name="email" value="{{ old('email') }}">
-                @error('email')
-                {{ $errors->first('email')  }}
-                @enderror
+                               @if(session('message'))
+                               <div class="alert alert-success">
+                                   {{ session('message') }}
+                               </div>
+                               @endif
+
+                               <div class="mb-3">
+                                   <input class="form-control" type="text" name="email" value="{{ old('email') }}" placeholder="Email">
+                                   @error('email')
+                                   <span class="form-text text-danger">{{ $errors->first('email')  }}</span>
+                                   @enderror
+                               </div>
+
+                               <div class="mb-3">
+                                   <input class="form-control" type="password" name="password" placeholder="password">
+                                   @error('password')
+                                   <span class="form-text text-danger">{{ $errors->first('password')  }}</span>
+                                   @enderror
+                               </div>
+
+                               <div class="mb-3 text-center">
+                                   <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                                   <label for="remember">
+                                       Remember Me
+                                   </label>
+                               </div>
+
+                               <div class="mb-1">
+                                   <button class="btn btn-primary w-100" type="submit">Login</button>
+                               </div>
+
+                               <div class="my-3 text-center">
+                                   OR
+                               </div>
+
+                               <div>
+                                   <img src="{{ asset('assets/Google-login-btn-r7.svg') }}" alt="google">
+                               </div>
+
+                           </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="mt-3 text-center">
+
+                    <div class="mb-3">
+                        <a class="text-decoration-none" href="{{ route('forgot') }}">Forgot Passwords?</a>
+                    </div>
+
+                    <div class="">
+                        No account?
+                        <a class="text-decoration-none" href="{{ route('register') }}">Register!</a>
+                    </div>
+
+                </div>
+
             </div>
-
-            <div class="mb-3">
-                <label for="">password</label>
-                <input class="form-control" type="text" name="password">
-                @error('password')
-                {{ $errors->first('password')  }}
-                @enderror
-            </div>
-
-            <div class="mb-1">
-                <button class="btn btn-primary" type="submit">Submit</button>
-            </div>
-
-            <div class="text-end">
-                <a href="{{ route('register') }}">Register</a>
-            </div>
-
-        </form>
-
+        </div>
     </div>
 
 </x-app-layout>

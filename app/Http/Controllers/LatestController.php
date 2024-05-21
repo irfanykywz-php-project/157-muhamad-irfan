@@ -11,7 +11,7 @@ class LatestController extends Controller
     public function index(){
 
         $files = DB::table('files')
-            ->orderBy('created_at', 'DESC')
+            ->latest()
             ->paginate(
             $perPage = 8, $columns = ['name', 'size', 'ext', 'code', 'created_at'], $pageName = 'files'
             );
