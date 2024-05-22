@@ -13,13 +13,13 @@
                     <ul class="list-group list-group-flush">
 
                         <li class="list-group-item text-center">
-                            <img width="75" src="https://sfile.mobi/images/profil/user68151_1642584459.png" alt="profile">
+                            <img width="75" src="{{ asset('assets/' . $user['photo']) }}" alt="profile">
                         </li>
                         <li class="list-group-item">
                             Name: <b>{{ $user['name'] }}</b>
                         </li>
                         <li class="list-group-item">
-                            Level: <b>New User</b>
+                            Level: <b>{{ $level }}</b>
                         </li>
                         <li class="list-group-item">
                             Total Downloaded: <b>{{ $total_download }}</b>

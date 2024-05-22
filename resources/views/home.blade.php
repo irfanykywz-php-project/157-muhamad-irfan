@@ -24,6 +24,9 @@
                             <div class="mb-3">
                                 <label class="text-white">File Description</label>
                                 <textarea class="form-control" name="description" rows="3"></textarea>
+                                @error('description')
+                                <small class="text-danger">{{ $errors->first('description')  }}</small>
+                                @enderror
                             </div>
 
                             <div class="mb-3">

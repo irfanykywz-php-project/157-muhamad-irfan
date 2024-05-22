@@ -4,9 +4,15 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-10">
 
+                @if(session('error'))
+                    <div class="alert alert-danger mt-1 mb-2">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 <div class="bg-primary d-flex align-items-center">
                     <div>
-                        <img class="p-3" width="75" src="https://lh3.googleusercontent.com/a/ACg8ocIj1SUUX3rT2qLSkuLpp9Iwbu-TrpmZtlRTPO37bNDEt9Aqhhw=s96-c" alt="user">
+                        <img class="p-3" width="75" src="{{ asset('assets/' . auth()->user()->photo) }}" alt="user">
                     </div>
                     <div>
                         <h1 class="fs-3 text-white">
@@ -34,22 +40,22 @@
                         <li class="list-group-item">
                             <div>
                                 Your Revenue:
-                                <b>Rp. 0</b>
+                                <b>Rp {{ ReadableNumber($user['reveneu'], '.') }}</b>
                             </div>
                             <div>
                                 Sfile Level:
-                                <b>New User</b>
+                                <b>{{ $level }}</b>
                             </div>
                             <div>
-                                Total Downloaded: <b>0</b>
+                                Total Downloaded: <b>{{ ReadableNumber($total_download, '.') }}</b>
                             </div>
                             <div>
                                 Total Earning:
-                                <b>Rp. 0</b>
+                                <b>Rp {{ ReadableNumber($total_earning, '.') }}</b>
                             </div>
                         </li>
                         <li class="list-group-item">
-                            <a class="text-decoration-none" href="{{ route('upload') }}">
+                            <a class="text-decoration-none" href="{{ route('home') }}">
                                 <i class="text-dark bi bi-upload"></i>
                                 Upload File
                             </a>
@@ -67,7 +73,8 @@
                             </a>
                         </li>
                         <li class="list-group-item">
-                            <a class="text-decoration-none" href="javascript:;">
+                            <a class="text-decoration-none" href="javascript:;"
+                               data-bs-toggle="modal" data-bs-target="#paymentModal">
                                 <i class="text-dark bi bi-credit-card"></i>
                                 Request Payment
                             </a>
@@ -98,5 +105,7 @@
             </div>
         </div>
     </div>
+
+    @include('user.payment-request')
 
 </x-app-layout>

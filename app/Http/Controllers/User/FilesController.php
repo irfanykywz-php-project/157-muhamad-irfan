@@ -12,11 +12,16 @@ use Illuminate\Support\Facades\Storage;
 
 class FilesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
         $files_query = DB::table('files')
             ->where('user_id', Auth::id());
+
+        // when search is exist
+        if ($q = $request->get('q')) {
+            $files_query->where('name', 'like', '%'.$q.'%');
+        }
 
         $files_count = $files_query->get()->count();
 
@@ -72,7 +77,8 @@ class FilesController extends Controller
         Storage::delete($file['path']);
 
         // delete database
-        Files::query()->where('code', $code)->delete();
+        $file->downloads()->delete();
+        $file->delete();
 
         return redirect()->route('user.files')->with('message', "{$file['name']} has deleted!");
     }

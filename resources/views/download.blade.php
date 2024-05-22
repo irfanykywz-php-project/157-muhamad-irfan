@@ -1,4 +1,4 @@
-<x-app-layout title="{{ config('app.name') }}">
+<x-app-layout title="{{ $file['name'] }}" robots="noindex, nofollow">
 
     <div class="container mt-5 mb-auto">
         <div class="row justify-content-center">
@@ -13,7 +13,7 @@
                         </h3>
 
                         <h4 class="text-primary my-4 fs-6">
-                            File_Name (444 bytes)
+                            {{ $file['name'] }} (444 bytes)
                         </h4>
 
                         <p>
@@ -21,7 +21,7 @@
                         </p>
 
                         <div class="text-center">
-                            <a class="btn btn-primary" href="{{ url('download/'. encrypt($file['code']) .'/start') }}" data-turbo="false">
+                            <a class="btn btn-primary" href="{{ route('download.start', encrypt($file['code'])) }}" data-turbo="false">
                                 Download File (444 bytes)
                             </a>
                         </div>
@@ -34,5 +34,11 @@
             </div>
         </div>
     </div>
+
+    <script>
+        {{--setTimeout(function (){--}}
+        {{--    window.location.href = '{{ route('download.start', encrypt($file['code'])) }}'--}}
+        {{--}, 3000)--}}
+    </script>
 
 </x-app-layout>

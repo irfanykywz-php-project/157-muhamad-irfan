@@ -22,7 +22,8 @@ class HomeController extends Controller
             'file' => [
                 'required',
                 File::default()->max('100mb')
-            ]
+            ],
+            'description' => ['nullable', 'max:255']
         ]);
 
         // get file information
@@ -42,8 +43,7 @@ class HomeController extends Controller
             'size' => $file->getSize(),
             'path' => $path,
             'code' => $code = Str::random(8),
-            'description' => $request->get('description'),
-            'password' => $request->get('password'),
+            'description' => $request->post('description'),
         ]);
 
         // redirect to previous file uploaded

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('path');
             $table->integer('downloaded')->default(0);
             $table->integer('viewed')->default(0);
-            $table->string('code')->unique();
+            $table->string('code')->unique()->index();
             $table->string('description')->nullable();
             $table->timestamps();
 

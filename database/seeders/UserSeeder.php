@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
                 'email' => 'admin@admin.com',
                 'password' => bcrypt('1234'),
                 'role_id' => 1,
+                'photo' => 'default_profile.png',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
                 'email' => 'guest@guest.com',
                 'password' => bcrypt('1234'),
                 'role_id' => 2,
+                'photo' => 'default_profile.png',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -37,6 +39,7 @@ class UserSeeder extends Seeder
                 'email' => 'user@user.com',
                 'password' => bcrypt('1234'),
                 'role_id' => 3,
+                'photo' => 'default_profile.png',
                 'created_at' => now(),
                 'updated_at' => now()
             ],

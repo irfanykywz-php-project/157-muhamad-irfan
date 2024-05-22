@@ -24,7 +24,7 @@
                         <li class="list-group-item">
                             <div>
                                 Your Revenue:
-                                <b>Rp. 0</b>
+                                <b>Rp {{ ReadableNumber($user['reveneu'], '.') }}</b>
                             </div>
                         </li>
 
@@ -45,13 +45,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                        </tr>
+                        @if(count($reveneu) > 0)
+                            @foreach($reveneu as $rev)
+                                <tr>
+                                    <td>{{ ReadableDate($rev->date) }}</td>
+                                    <td>{{ ReadableHumanNumber($rev->total_download) }}</td>
+                                    <td>Rp {{ ReadableNumber($rev->total_reveneu, '.') }}</td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="3">
+                                    <p class="my-3 fs-5 text-center">
+                                        Reveneu data not available...
+                                    </p>
+                                </td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
+
+                @if($reveneu->hasPages())
+                    <div class="my-3">
+                        {{ $reveneu->onEachSide(0)->links() }}
+                    </div>
+                @endif
 
             </div>
         </div>

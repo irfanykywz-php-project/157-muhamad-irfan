@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('download', function (Blueprint $table) {
+        Schema::create('downloads', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('file_id');
             $table->string('ip');
             $table->enum('is_valid', ['y', 'n']);
-            $table->integer('reveneu');
+            $table->unsignedBigInteger('reveneu');
             $table->timestamps();
 
             $table->foreign('file_id')->references('id')->on('files');

@@ -10,6 +10,7 @@ class LoginController extends Controller
 {
 
     public function index(){
+//        dd(Auth::viaRemember());
         return view('auth.login');
     }
 
@@ -23,7 +24,7 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->post('remember') ?: false)) {
             $request->session()->regenerate();
 
             return redirect()->intended('profile');

@@ -5,10 +5,18 @@ Nomor Urut : 157
 Judul Project : Sfile Clone  
 
 Fitur :
-- Auth (5%)
-- Page [Latest, Trending, Category, Search] (10%)
-- Upload (75%)
-- Download (75%)
-- User [Public, Authed, Admin] (30%)
+- Auth (85%)
+- Page [Latest, Trending, Category, Search] (100%)
+- Upload (95%)
+- Download (95%)
+- User Guest Page (100%)
+- User Registerd Page
+  - Reveneu Page (100%)
+  - Payment [request, status] (100%)
+  - Edit Profile [name, photo, delete account] (85%)
+- Admin Page
+  - List All Files (0%)
+  - List All User (0%)
+  - List All Payment (0%)
 
-Rata-Rata Progress : 35%
+Total Progress : 75%

@@ -16,12 +16,13 @@ class ProfilePublicController extends Controller
 
         $total_files = Files::where('user_id', $user['id'])->count();
         $total_download = Files::where('user_id', $user['id'])->sum('downloaded');
-
+        $level = $this->level($total_download);
 
         return view('user.profile-public', [
             'user' => $user,
             'total_files' => $total_files,
-            'total_download' => $total_download
+            'total_download' => $total_download,
+            'level' => $level
         ]);
     }
 }

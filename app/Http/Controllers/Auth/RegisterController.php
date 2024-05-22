@@ -16,14 +16,15 @@ class RegisterController extends Controller
     public function process(Request $request){
 
         $user = $request->validate([
-            'name' => ['required|string|regex:/\w*$/|max:255|unique:users,name'],
+            'name' => ['required', 'string', 'regex:/\w*$/', 'max:255', 'unique:users,name'],
             'email' => ['required', 'email'],
             'password' => ['required'],
             'checklist' => ['required']
         ]);
 
         User::create(array_merge($user, [
-            'role_id' => 3 // 3 = user
+            'role_id' => 3, // 3 = user,
+            'photo' => 'default_profile.png'
         ]));
 
         return redirect()->route('login')

@@ -39,7 +39,7 @@
 
                 {{-- download button --}}
                 <div class="text-center mb-3">
-                    <a class="btn btn-primary" href="{{ url('download/'. $file['code']) }}">
+                    <a class="btn btn-primary" href="{{ route('download', $file['code']) }}" rel="noindex nofollow noreferrer">
                         Download {{ $file['name'] }}
                     </a>
                 </div>
@@ -64,11 +64,21 @@
                         </li>
 
                         <li class="list-group-item">
-                            Share button
+                            Share on
+                            <a class="text-decoration-none" aria-label="Share to Facebook" href="https://www.facebook.com/share.php?u={{ url()->current() }}" target="_blank">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a class="text-decoration-none" aria-label="Share to Twitter" href="https://twitter.com/intent/tweet?url={{ url()->current() }}" target="_blank" rel="noopener noreferrer">
+                                <i class="bi bi-twitter-x"></i>
+                            </a>
+                            or
+                            <a id="share" class="text-decoration-none" href="javascript:;">
+                                <i class="bi bi-share"></i>
+                            </a>
                         </li>
 
                         <li class="list-group-item">
-                            comment
+                            <a id="comment" class="text-decoration-none" href="javascript:;">Show Comments</a>
                         </li>
                     </ul>
 
@@ -78,5 +88,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('share').addEventListener('click', function (){
+            navigator.share({
+                title: '{{ $file['name'] }}',
+                url: '{{ url()->current() }}',
+            })
+        })
+
+        document.getElementById('comment').addEventListener('click', function (){
+            console.log('show comment...')
+        })
+    </script>
 
 </x-app-layout>

@@ -14,14 +14,20 @@ class FileSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $ext = ['jpg', 'zip', 'rar', 'mp3'];
+
         for ($i = 0; $i < 100 ; $i++) {
+
+            $c_ext = $ext[array_rand($ext)];
+
             Files::create([
-                'user_id' => 2,
-                'name' => fake()->name(),
-                'ext' => Str::random(3),
+                'user_id' => random_int(2 , 3),
+                'name' => fake()->name() . '.' . $c_ext,
+                'ext' => $c_ext,
                 'size' => random_int(1024, 99999999),
                 'description' => Str::random(100),
-                'downloaded' => random_int(1, 9999),
+                'downloaded' => random_int(1, 200),
                 'viewed' => random_int(1, 9999),
                 'code' => Str::random('8'),
                 'path' => ''

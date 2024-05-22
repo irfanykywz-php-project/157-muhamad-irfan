@@ -1,4 +1,12 @@
 # ChangeLog
+**22 Mei 2024**
+- profile page [edit, delete]
+- profile file [search]
+- category page
+- download page [reveneu]
+- reveneu page
+- payment page [request, status]
+
 **21 Mei 2024**
 - migration [payment, files, roles, downloaded]
 - seeder [files, role, user]

@@ -1,5 +1,6 @@
 @props([
     'title',
+    'robots',
     'removeheader',
     'removefooter',
 ])
@@ -17,6 +18,14 @@
             {{ config('app.name') }}
         @endisset
     </title>
+
+    {{-- icon --}}
+    <link rel="shortcut icon" href="{{ asset('assets/sfile-favicon.png') }}" type="image/x-icon" />
+
+    <!-- robots -->
+    @isset($robots)
+        <meta name="robots" content="{{ $robots }}">
+    @endisset
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

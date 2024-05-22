@@ -1,7 +1,9 @@
-search
-category
-downloaded logic
-file page share, comment ?
-payment
-profile edit
-user files search
+## priority
+member payment page
+
+## last
+admin [user, files]
+
+## later
+file page comment ?  
+profile edit photo upload  

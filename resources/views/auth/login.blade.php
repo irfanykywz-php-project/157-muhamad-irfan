@@ -30,6 +30,12 @@
                                </div>
                                @endif
 
+                               @if(session('delete'))
+                                   <div class="alert alert-danger">
+                                       {{ session('delete') }}
+                                   </div>
+                               @endif
+
                                <div class="mb-3">
                                    <input class="form-control" type="text" name="email" value="{{ old('email') }}" placeholder="Email">
                                    @error('email')
@@ -45,7 +51,7 @@
                                </div>
 
                                <div class="mb-3 text-center">
-                                   <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                                   <input class="form-check-input" type="checkbox" name="remember" id="remember" value="true">
                                    <label for="remember">
                                        Remember Me
                                    </label>

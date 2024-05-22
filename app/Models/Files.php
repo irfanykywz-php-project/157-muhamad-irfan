@@ -27,6 +27,11 @@ class Files extends Model
         'viewed'
     ];
 
+    public function downloads()
+    {
+        return $this->hasMany(Download::class, 'file_id');
+    }
+
     public function downloadedIncrement()
     {
         $this->downloaded++;
