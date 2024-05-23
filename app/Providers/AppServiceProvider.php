@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,5 +25,10 @@ class AppServiceProvider extends ServiceProvider
     {
         // set bootstrap paginator
         Paginator::useBootstrapFive();
+
+        // role identification
+//        Blade::if('admin', function (){
+//            return \auth()?->user()?->role_id == User::ROLE_ADMIN;
+//        });
     }
 }

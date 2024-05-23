@@ -1,4 +1,13 @@
 # ChangeLog
+**23 Mei 2024**
+- fix payment request [validation]
+- add php module [barryvdh/laravel-debugbar]
+- create middleware role
+- create admin [dashboard, files, payment, user]
+- add js module [bootstrap-table, jquery]
+- refactory readable use mutator
+- page member-payment
+
 **22 Mei 2024**
 - profile page [edit, delete]
 - profile file [search]

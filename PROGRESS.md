@@ -15,8 +15,8 @@ Fitur :
   - Payment [request, status] (100%)
   - Edit Profile [name, photo, delete account] (85%)
 - Admin Page
-  - List All Files (0%)
-  - List All User (0%)
-  - List All Payment (0%)
+  - Files (100%)
+  - User (85%)
+  - Payment (85%)
 
-Total Progress : 75%
+Total Progress : 85%

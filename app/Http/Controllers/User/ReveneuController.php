@@ -16,8 +16,11 @@ class ReveneuController extends Controller
 
         $user = $user->where('id', Auth::user()->id)->first();
 
-        $reveneu = DB::table('downloads')
-            ->select(DB::raw('DATE(created_at) as date'), DB::raw('SUM(reveneu) total_reveneu'), DB::raw('COUNT(*) as total_download'))
+        $reveneu = Download::select(
+                DB::raw('DATE(created_at) as date'),
+                DB::raw('SUM(reveneu) total_reveneu'),
+                DB::raw('COUNT(*) as total_download')
+            )
             ->where('owner_id', $user['id'])
             ->groupBy('date')
             ->orderBy('date', 'DESC')

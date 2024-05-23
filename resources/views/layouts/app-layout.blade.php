@@ -1,6 +1,7 @@
 @props([
     'title',
     'robots',
+    'turbofresh',
     'removeheader',
     'removefooter',
 ])
@@ -33,6 +34,12 @@
     <!-- turbo -->
     <meta name="turbo-cache-control" content="no-cache">
     <meta name="turbo-prefetch" content="false">
+    @if(session('turbo-reload') or @isset($turbofresh))
+        <meta name="turbo-visit-control" content="reload">
+    @endif
+
+    {{-- csrf --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -49,6 +56,8 @@
 @if(!@isset($removefooter))
     @include('layouts.app-layout.footer')
 @endif
+
+@stack('scripts')
 
 </body>
 </html>

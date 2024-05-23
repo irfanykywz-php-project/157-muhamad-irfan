@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,10 +25,26 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
+
         if (Auth::attempt($credentials, $request->post('remember') ?: false)) {
+
+            // if role is guest > prevent login
+            if (Auth::user()->role('guest')){
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return back()->withErrors([
+                    'invalid' => 'guest cannot logined !'
+                ]);
+            }
+
             $request->session()->regenerate();
 
-            return redirect()->intended('profile');
+            // check role and redirect
+            if (Auth::user()->role('admin')){
+                return redirect()->route('admin.dashboard');
+            }else{
+                return redirect()->route('user.profile');
+            }
         }
 
         return back()->withErrors([

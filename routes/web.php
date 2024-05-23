@@ -20,7 +20,7 @@ Route::get('/search', [\App\Http\Controllers\SearchController::class, 'index'])-
 Route::get('/category/{category}', [\App\Http\Controllers\CategoryController::class, 'index'])->name('category');
 
 // page
-Route::get('/p/{page}', [\App\Http\Controllers\PageController::class, 'index']);
+Route::get('/p/{page}', [\App\Http\Controllers\PageController::class, 'index'])->name('pages');
 
 // auth
 Route::middleware(['guest'])->group(function (){
@@ -30,27 +30,44 @@ Route::middleware(['guest'])->group(function (){
     Route::post('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'process']);
     Route::get('/forgot', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('forgot');
 });
+Route::get('/logout', [\App\Http\Controllers\Auth\LogoutController::class, 'process'])->name('logout');
 
-// user auth page
-Route::middleware(['auth', 'auth.session'])->group(function () {
+// admin page
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function (){
+    Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/logout', [\App\Http\Controllers\Auth\LogoutController::class, 'process'])->name('logout');
+    Route::get('/files', [\App\Http\Controllers\Admin\FilesController::class, 'index'])->name('files');
+    Route::get('/files/show', [\App\Http\Controllers\Admin\FilesController::class, 'show'])->name('files.show');
+    Route::delete('/files/destroy', [\App\Http\Controllers\Admin\FilesController::class, 'destroy'])->name('files.destroy');
 
-    Route::get('/profile', [\App\Http\Controllers\User\ProfileController::class, 'index'])->name('user.profile');
-    Route::get('/profile/edit', [\App\Http\Controllers\User\ProfileController::class, 'edit'])->name('user.profile.edit');
-    Route::put('/profile/update', [\App\Http\Controllers\User\ProfileController::class, 'update'])->name('user.profile.update');;
-    Route::get('/profile/delete', [\App\Http\Controllers\User\ProfileController::class, 'delete'])->name('user.profile.delete');
-    Route::delete('/profile/destroy', [\App\Http\Controllers\User\ProfileController::class, 'destroy'])->name('user.profile.destroy');;
+    Route::get('/payment', [\App\Http\Controllers\Admin\PaymentController::class, 'index'])->name('payment');
+    Route::get('/payment/show', [\App\Http\Controllers\Admin\PaymentController::class, 'show'])->name('payment.show');
+    Route::put('/payment/update', [\App\Http\Controllers\Admin\PaymentController::class, 'update'])->name('payment.update');
 
-    Route::get('/files', [\App\Http\Controllers\User\FilesController::class, 'index'])->name('user.files');
-    Route::get('/files/e/{code}', [\App\Http\Controllers\User\FilesController::class, 'edit']);
+    Route::get('/user', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('user');
+    Route::get('/user/show', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('user.show');
+    Route::put('/user/update', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('user.update');
+    Route::delete('/user/destroy', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('user.destroy');
+});
+
+// user page
+Route::middleware(['auth', 'auth.session' ,'role:user'])->name('user.')->group(function () {
+
+    Route::get('/profile', [\App\Http\Controllers\User\ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/edit', [\App\Http\Controllers\User\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/update', [\App\Http\Controllers\User\ProfileController::class, 'update'])->name('profile.update');;
+    Route::get('/profile/delete', [\App\Http\Controllers\User\ProfileController::class, 'delete'])->name('profile.delete');
+    Route::delete('/profile/destroy', [\App\Http\Controllers\User\ProfileController::class, 'destroy'])->name('profile.destroy');;
+
+    Route::get('/files', [\App\Http\Controllers\User\FilesController::class, 'index'])->name('files');
+    Route::get('/files/e/{code}', [\App\Http\Controllers\User\FilesController::class, 'edit'])->name('files.edit');
     Route::put('/files/e/{code}', [\App\Http\Controllers\User\FilesController::class, 'update']);
-    Route::get('/files/d/{code}', [\App\Http\Controllers\User\FilesController::class, 'delete']);
+    Route::get('/files/d/{code}', [\App\Http\Controllers\User\FilesController::class, 'delete'])->name('files.delete');
     Route::delete('/files/d/{code}', [\App\Http\Controllers\User\FilesController::class, 'destroy']);
 
-    Route::get('/reveneu', [\App\Http\Controllers\User\ReveneuController::class, 'index'])->name('user.reveneu');
-    Route::get('/payment', [\App\Http\Controllers\User\PaymentController::class, 'payment'])->name('user.payment');
-    Route::post('/payout', [\App\Http\Controllers\User\PaymentController::class, 'payout'])->name('user.payout');
+    Route::get('/reveneu', [\App\Http\Controllers\User\ReveneuController::class, 'index'])->name('reveneu');
+    Route::get('/payment', [\App\Http\Controllers\User\PaymentController::class, 'payment'])->name('payment');
+    Route::post('/payout', [\App\Http\Controllers\User\PaymentController::class, 'payout'])->name('payout');
 });
 
 // user public page

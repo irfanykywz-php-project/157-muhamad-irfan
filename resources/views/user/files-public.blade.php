@@ -17,10 +17,10 @@
 
                                 <div class="d-flex align-items-center">
                                     <i class="bi bi-inbox me-2"></i>
-                                    <a class="fs- text-decoration-none" href="{{ url($file->code) }}">
+                                    <a class="fs- text-decoration-none" href="{{ route('file', $file->code) }}">
                                         {{ $file->name }}
                                     </a>
-                                    <span>({{ ReadableSize($file->size) }})</span>
+                                    <span class="ps-1">({{ $file->size }})</span>
                                 </div>
 
                             </li>

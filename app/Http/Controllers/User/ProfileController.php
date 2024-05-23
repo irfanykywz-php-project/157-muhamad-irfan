@@ -70,13 +70,18 @@ class ProfileController extends Controller
         // get user
         $user = User::find(Auth::user()->id);
 
+        // delete payment
+        $user->payments()->delete();
+
         // delete file
         $files = Files::where('user_id', $user['id']);
         foreach ($files->get() as $file)
         {
+            $file->downloads()->delete();
             Storage::delete($file['path']);
         }
         $files->delete();
+
 
         // logout
         Auth::logout();

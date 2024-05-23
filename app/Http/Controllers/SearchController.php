@@ -11,10 +11,9 @@ class SearchController extends Controller
     public function index(Request $request)
     {
 
-        $files_query = DB::table('files')
-            ->where('name', 'like', '%'.$request->get('q').'%');
+        $files_query = Files::where('name', 'like', '%'.$request->get('q').'%');
 
-        $files_count = $files_query->get()->count();
+        $files_count = $files_query->count();
 
         $files = $files_query
             ->latest()

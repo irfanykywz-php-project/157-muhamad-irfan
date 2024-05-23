@@ -13,7 +13,7 @@
                         </h3>
 
                         <h4 class="text-primary my-4 fs-6">
-                            {{ $file['name'] }} (444 bytes)
+                            {{ $file['name'] }} ({{ $file['size'] }})
                         </h4>
 
                         <p>
@@ -22,7 +22,7 @@
 
                         <div class="text-center">
                             <a class="btn btn-primary" href="{{ route('download.start', encrypt($file['code'])) }}" data-turbo="false">
-                                Download File (444 bytes)
+                                Download File ({{ $file['size'] }})
                             </a>
                         </div>
 
@@ -35,10 +35,12 @@
         </div>
     </div>
 
-    <script>
-        {{--setTimeout(function (){--}}
-        {{--    window.location.href = '{{ route('download.start', encrypt($file['code'])) }}'--}}
-        {{--}, 3000)--}}
-    </script>
+    @push('scripts')
+        <script>
+            setTimeout(function (){
+                window.location.href = '{{ route('download.start', encrypt($file['code'])) }}'
+            }, 3000)
+        </script>
+    @endpush
 
 </x-app-layout>

@@ -18,11 +18,11 @@
                         </li>
                         <li class="list-group-item">
                             <i class="bi bi-person"></i>
-                            <a class="text-decoration-none" href="{{ url('user/'.$user['name']) }}">
+                            <a class="text-decoration-none" href="{{ route('public.profile', $user['name']) }}">
                                 {{ $user['name'] }}
                             </a>
                             on
-                            <a class="text-decoration-none" href="category/{{ $file['ext'] }}">
+                            <a class="text-decoration-none" href="{{ route('category', $file['ext']) }}">
                                 {{ $file['ext'] }}
                             </a>
                         </li>
@@ -89,17 +89,19 @@
         </div>
     </div>
 
-    <script>
-        document.getElementById('share').addEventListener('click', function (){
-            navigator.share({
-                title: '{{ $file['name'] }}',
-                url: '{{ url()->current() }}',
+    @push('scripts')
+        <script>
+            document.getElementById('share').addEventListener('click', function (){
+                navigator.share({
+                    title: '{{ $file['name'] }}',
+                    url: '{{ url()->current() }}',
+                })
             })
-        })
 
-        document.getElementById('comment').addEventListener('click', function (){
-            console.log('show comment...')
-        })
-    </script>
+            document.getElementById('comment').addEventListener('click', function (){
+                console.log('show comment...')
+            })
+        </script>
+    @endpush
 
 </x-app-layout>

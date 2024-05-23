@@ -1,30 +1,54 @@
-<x-app-layout title="Member Payment - {{ config('app.name') }}">
+<x-app-layout title="Member Payment Status">
 
-    <div class="container mb-auto mt-5">
+    <div class="container mt-2 mb-auto">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-10">
 
-                <h1 class="mb-3 pb-2 border-bottom ">
-                    Member Payment
-                </h1>
+                <div class="card">
 
-                <article>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores corporis delectus deleniti dolorem eveniet fugiat illum iusto, laudantium libero, magnam mollitia non optio pariatur perferendis quam ratione veritatis voluptatum? Debitis!
-                    </p>
+                    <div class="card-header rounded-0 bg-primary">
+                        <h1 class="mb-0 fs-4 text-white">
+                            <i class="bi bi-credit-card"></i>
+                            Member Payment Status
+                        </h1>
+                    </div>
 
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores corporis delectus deleniti dolorem eveniet fugiat illum iusto, laudantium libero, magnam mollitia non optio pariatur perferendis quam ratione veritatis voluptatum? Debitis!
-                    </p>
+                    <ul class="list-group list-group-flush">
+                        @foreach($payment as $pay)
+                            <li class="list-group-item">
+                                <p class="small mb-0">
+                                    <b>ID</b> : #{{ $pay->id }}
+                                </p>
+                                <p class="small mb-0">
+                                    <b>Name</b> : {{ $pay->user }}
+                                </p>
+                                <p class="small mb-0">
+                                    <b>Number</b> : {{ $pay->destination }}-{{ $pay->method }}
+                                </p>
+                                <p class="small mb-0">
+                                    <b>Request Date</b> : {{ $pay->created_at }}
+                                </p>
+                                <p class="small mb-0">
+                                    <b>Amount</b> : {{ $pay->total }}
+                                </p>
+                                <p class="small mb-0">
+                                    <b>Status</b> : <span class="text-success">{{ $pay->status }}</span>
+                                </p>
+                                <p class="small mb-0">
+                                    <b>Last Updated</b> : {{ $pay->updated_at }}
+                                </p>
 
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores corporis delectus deleniti dolorem eveniet fugiat illum iusto, laudantium libero, magnam mollitia non optio pariatur perferendis quam ratione veritatis voluptatum? Debitis!
-                    </p>
+                            </li>
+                        @endforeach
+                    </ul>
 
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores corporis delectus deleniti dolorem eveniet fugiat illum iusto, laudantium libero, magnam mollitia non optio pariatur perferendis quam ratione veritatis voluptatum? Debitis!
-                    </p>
-                </article>
+                    @if($payment->hasPages())
+                        <div class="border-top-1 mx-3 mt-3">
+                            {{ $payment->onEachSide(0)->links() }}
+                        </div>
+                    @endif
+
+                </div>
 
             </div>
         </div>

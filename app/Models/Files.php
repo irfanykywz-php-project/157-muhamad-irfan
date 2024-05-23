@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -27,11 +28,34 @@ class Files extends Model
         'viewed'
     ];
 
-    public function downloads()
+    /**
+     * mutator
+     */
+    protected function size(): Attribute
     {
-        return $this->hasMany(Download::class, 'file_id');
+        return Attribute::make(
+            get: fn (string $value) => ReadableSize($value),
+        );
     }
 
+    protected function createdAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => ReadableDate($value),
+        );
+    }
+
+    protected function downloaded(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => ReadableNumber($value, '.'),
+        );
+    }
+
+
+    /**
+     * increment
+     */
     public function downloadedIncrement()
     {
         $this->downloaded++;
@@ -42,5 +66,19 @@ class Files extends Model
     {
         $this->viewed++;
         return $this->save();
+    }
+
+
+    /**
+     * Relation
+     */
+    public function downloads()
+    {
+        return $this->hasMany(Download::class, 'file_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

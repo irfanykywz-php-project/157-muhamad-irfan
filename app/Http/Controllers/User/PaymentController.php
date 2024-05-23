@@ -16,8 +16,7 @@ class PaymentController extends Controller
 
         $user = $user->where('id', Auth::user()->id)->first();
 
-        $payment = DB::table('payment')
-            ->latest()
+        $payment = Payment::latest()
             ->where('user_id', $user['id'])
             ->paginate(8);
 
@@ -30,6 +29,12 @@ class PaymentController extends Controller
     public function payout(Request $request)
     {
 
+        $request->validate([
+            'total' => ['required'],
+            'method' => ['required'],
+            'destination' => ['required'],
+        ]);
+
         $total = $request->post('total');
         $method = $request->post('method');
         $destination = $request->post('destination');
@@ -37,7 +42,9 @@ class PaymentController extends Controller
         // validate reveneu with total input
         $user = User::where('id', Auth::user()->id)->first();
         if ($total > $user['reveneu']){
-            return redirect()->back()->with('error', 'Error! Your Revenue Not Enough !!!');
+            return redirect()->back()->withErrors([
+                'total' => 'Error! your revenue not enough !!!'
+            ])->withInput();
         }
 
         // crete payment
@@ -52,6 +59,6 @@ class PaymentController extends Controller
         // update reveneu user
         User::where('id', Auth::user()->id)->decrement('reveneu', $total);
 
-        return redirect()->route('user.payment')->with('message', 'Berhasil membuat pembayaran, silahkan tunggu!');
+        return redirect()->route('user.payment')->with('message', 'Success! your payment has created! (wait admin process...)');
     }
 }

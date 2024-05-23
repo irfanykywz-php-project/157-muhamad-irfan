@@ -22,7 +22,7 @@
                             Level: <b>{{ $level }}</b>
                         </li>
                         <li class="list-group-item">
-                            Total Downloaded: <b>{{ $total_download }}</b>
+                            Total Downloaded: <b>{{ ReadableNumber($total_download, '.') }}</b>
                         </li>
                         <li class="list-group-item">
                             {{ $user['name'] }}'s Uploads:

@@ -61,13 +61,13 @@
                                     <button class="btn btn-primary w-100" type="submit">Sign Up</button>
                                 </div>
 
-                                <div class="my-3 text-center">
-                                    OR
-                                </div>
+{{--                                <div class="my-3 text-center">--}}
+{{--                                    OR--}}
+{{--                                </div>--}}
 
-                                <div>
-                                    <img src="{{ asset('assets/Google-login-btn-r7.svg') }}" alt="google">
-                                </div>
+{{--                                <div>--}}
+{{--                                    <img src="{{ asset('assets/Google-login-btn-r7.svg') }}" alt="google">--}}
+{{--                                </div>--}}
 
                             </div>
 

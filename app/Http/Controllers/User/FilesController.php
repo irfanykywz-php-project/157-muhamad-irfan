@@ -15,8 +15,7 @@ class FilesController extends Controller
     public function index(Request $request)
     {
 
-        $files_query = DB::table('files')
-            ->where('user_id', Auth::id());
+        $files_query = Files::where('user_id', Auth::id());
 
         // when search is exist
         if ($q = $request->get('q')) {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Files;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -10,8 +11,7 @@ class CategoryController extends Controller
     public function index($category)
     {
 
-        $files_query = DB::table('files')
-            ->where('ext', '=', $category);
+        $files_query = Files::where('ext', '=', $category);
 
         $files = $files_query
             ->latest()

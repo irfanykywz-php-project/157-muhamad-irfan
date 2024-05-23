@@ -11,23 +11,29 @@
                         </h1>
                     </div>
                     <ul class="list-group list-group-flush">
+                        @if(count($files) > 0)
+                            @foreach($files as $file)
+                                <li class="list-group-item">
 
-                        @foreach($files as $file)
-                            <li class="list-group-item">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-inbox me-2"></i>
+                                        <a class="fs- text-decoration-none" href="{{ route('file', $file->code) }}">
+                                            {{ $file->name }}
+                                        </a>
+                                    </div>
+                                    <div class="d-flex">
+                                        <span class="me-2">{{ $file->size }}</span>
+                                        <span>Uploaded: {{ $file->created_at }}</span>
+                                    </div>
 
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-inbox me-2"></i>
-                                    <a class="fs- text-decoration-none" href="{{ url($file->code) }}">
-                                        {{ $file->name }}
-                                    </a>
-                                </div>
-                                <div class="d-flex">
-                                    <span class="me-2">{{ ReadableSize($file->size) }}</span>
-                                    <span>Uploaded: {{ ReadableDate($file->created_at) }}</span>
-                                </div>
+                                </li>
+                            @endforeach
+                        @else
+                            <p class="my-3 fs-5 text-center">
+                                Files data not available...
+                            </p>
+                        @endif
 
-                            </li>
-                        @endforeach
 
                     </ul>
                     @if($files->hasPages())

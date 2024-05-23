@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\Files;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,8 +16,7 @@ class FilesPublicController extends Controller
 
         $user = $user->where('name', $name)->firstOrFail();
 
-        $files = DB::table('files')
-            ->where('user_id', $user['id'])
+        $files = Files::where('user_id', $user['id'])
             ->orderBy('created_at', 'DESC')
             ->paginate(
                 $perPage = 8, $columns = ['name', 'size', 'ext', 'code', 'created_at', 'downloaded'], $pageName = 'page'

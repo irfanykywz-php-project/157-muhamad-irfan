@@ -47,4 +47,18 @@ class User extends Authenticatable
         ];
     }
 
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'user_id');
+    }
+
+    public function role($role_name)
+    {
+        $role = $this->belongsTo(Roles::class, 'role_id', 'id')->first('name');
+
+        if ($role['name'] == $role_name){
+            return true;
+        }
+    }
+
 }

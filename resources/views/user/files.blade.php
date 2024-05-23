@@ -62,17 +62,17 @@
                                                 {{ $file->name }}
                                             </a>
                                             <span class="ms-1">
-                                        ({{ ReadableSize($file->size) }})
+                                        ({{ $file->size }})
                                     </span>
                                         </div>
                                         <div class="d-flex">
                                             <span class="me-2">Download: {{ $file->downloaded }}</span>
-                                            <span>Uploaded: {{ ReadableDate($file->created_at) }}</span>
+                                            <span>Uploaded: {{ $file->created_at }}</span>
                                         </div>
                                         <div class="d-flex gap-1 align-items-center">
-                                            <a class="text-decoration-none" href="{{ route('user.files') . '/e/' . $file->code }}">Edit</a>
+                                            <a class="text-decoration-none" href="{{ route('user.files.edit', $file->code) }}">Edit</a>
                                             <span>|</span>
-                                            <a class="text-decoration-none text-danger" href="{{ route('user.files') . '/d/' . $file->code }}">Delete</a>
+                                            <a class="text-decoration-none text-danger" href="{{ route('user.files.delete', $file->code) }}">Delete</a>
                                         </div>
                                     </li>
                                 @endforeach

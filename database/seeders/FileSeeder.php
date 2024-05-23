@@ -17,7 +17,7 @@ class FileSeeder extends Seeder
 
         $ext = ['jpg', 'zip', 'rar', 'mp3'];
 
-        for ($i = 0; $i < 100 ; $i++) {
+        for ($i = 0; $i < 500 ; $i++) {
 
             $c_ext = $ext[array_rand($ext)];
 

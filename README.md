@@ -19,8 +19,7 @@ Deskripi : aplikasi berbagi file
    - npm install
    - npm run build
    - composer install
-   - php artisan migrate
-   - php artisan db:seed
+   - php artisan migrate --seed
    - php artisan key:generate
    - php artisan serve
 4. Open http://localhost:8000

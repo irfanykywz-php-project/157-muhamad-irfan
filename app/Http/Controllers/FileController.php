@@ -11,15 +11,15 @@ class FileController extends Controller
     public function index($code, Files $file)
     {
 
-        $file = $file->where('code', $code)->firstOrFail();
-        $user = User::where('id', $file['user_id'])->firstOrFail();
+        $file = $file->where('code', $code)->with('user')->firstOrFail();
+        // dd($file->user);
 
         // viewed increment
         $file->viewedIncrement();
 
         return view('file', [
             'file' => $file,
-            'user' => $user
+            'user' => $file->user
         ]);
     }
 }

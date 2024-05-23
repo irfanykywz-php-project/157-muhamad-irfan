@@ -32,7 +32,7 @@
                             <div class="mb-3">
                                 <label for="">Filename:</label>
                                 <div class="input-group align-items-center">
-                                    <input class="form-control" name="name" type="text" value="{{ explode('.', $file['name'])[0] }}">
+                                    <input class="form-control" name="name" type="text" value="{{ substr($file['name'], 0, strrpos($file['name'], '.'));  }}">
                                     <span>.{{ $file['ext'] }}</span>
                                 </div>
                                 @error('name')
