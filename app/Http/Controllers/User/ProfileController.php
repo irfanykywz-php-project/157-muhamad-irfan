@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -53,6 +54,29 @@ class ProfileController extends Controller
         User::whereId(Auth::user()->id)->update($request->only(['name']));
 
         return redirect()->back()->with('message', 'success update profile!');
+    }
+
+    public function photo(Request $request)
+    {
+
+        // delete previous photo
+        Storage::disk('public')->delete(Auth::user()->photo);
+
+        // add new photo
+        // https://laracasts.com/discuss/channels/laravel/create-image-from-base64-string-laravel
+        $image_64 = $request->post('photo');
+        $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
+        $replace = substr($image_64, 0, strpos($image_64, ',')+1);
+        $image = str_replace($replace, '', $image_64);
+        $image = str_replace(' ', '+', $image);
+        $imageName = Str::random(10).'.'.$extension;
+        $path = 'photo/'.$imageName;
+        Storage::disk('public')->put($path, base64_decode($image));
+
+        // update path
+        User::where('id', Auth::id())->update([
+            'photo' => $path
+        ]);
     }
 
     public function delete()

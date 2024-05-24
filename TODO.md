@@ -2,5 +2,4 @@
 files download count down
 
 ## later
-file page comment ?  
-profile edit photo upload  
+file page comment ?   

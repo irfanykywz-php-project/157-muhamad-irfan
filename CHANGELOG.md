@@ -5,6 +5,7 @@
 - admin user [status, delete]
 - admin payment [status]
 - admin dashboard [total user, total files, total payment, payment pending]
+- profile edit photo upload & crop 
 
 **23 Mei 2024**
 - fix payment request [validation]

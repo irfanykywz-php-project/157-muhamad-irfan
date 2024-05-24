@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Files;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\File;
 
@@ -29,11 +30,10 @@ class HomeController extends Controller
         // get file information
         $file = $request->file('file');
 
-        // store file to public folder
-        $path = $file->store('files');
+        // store file to local > files folder
+//        $path = $file->store('files');
         // store with Storage
-        //$path = Storage::putFile('public/files', $request->file('file'));
-        //Storage::delete('public/files/awe.jpg');
+        $path = Storage::disk('local')->putFile('files', $file);
 
         // save
         Files::create([

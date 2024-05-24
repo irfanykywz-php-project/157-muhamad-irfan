@@ -13,7 +13,7 @@
                     <ul class="list-group list-group-flush">
 
                         <li class="list-group-item text-center">
-                            <img width="75" src="{{ asset('assets/' . $user['photo']) }}" alt="profile">
+                            <img width="75" src="{{ $user->photoUrl($user['photo']) }}" alt="profile">
                         </li>
                         <li class="list-group-item">
                             Name: <b>{{ $user['name'] }}</b>

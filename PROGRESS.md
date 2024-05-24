@@ -13,10 +13,10 @@ Fitur :
 - User Registerd Page
   - Reveneu Page (100%)
   - Payment [request, status] (100%)
-  - Edit Profile [name, photo, delete account] (85%)
+  - Edit Profile [name, photo, delete account] (100%)
 - Admin Page
   - Files (100%)
   - User (100%)
   - Payment (100%)
 
-Total Progress : 90%
+Total Progress : 92%

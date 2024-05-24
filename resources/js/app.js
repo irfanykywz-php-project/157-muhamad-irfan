@@ -8,6 +8,11 @@ window.bootstrap = bootstrap;
 // Added: Popper.js dependency for popover support in Bootstrap
 import '@popperjs/core';
 
+// jquery
+import jQuery from "jquery";
+window.$ = jQuery;
+window.jQuery = jQuery;
+
 // Turbo hotwired
 import * as Turbo from '@hotwired/turbo'
 

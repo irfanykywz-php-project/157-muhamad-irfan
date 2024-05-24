@@ -12,7 +12,7 @@
 
                 <div class="bg-primary d-flex align-items-center">
                     <div>
-                        <img class="p-3" width="75" src="{{ asset('assets/' . auth()->user()->photo) }}" alt="user">
+                        <img class="p-3" width="75" src="{{ auth()->user()->photoUrl(auth()->user()->photo) }}" alt="user">
                     </div>
                     <div>
                         <h1 class="fs-3 text-white">

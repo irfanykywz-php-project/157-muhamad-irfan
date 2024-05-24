@@ -55,9 +55,10 @@ Route::middleware(['auth', 'auth.session' ,'role:user'])->name('user.')->group(f
 
     Route::get('/profile', [\App\Http\Controllers\User\ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/edit', [\App\Http\Controllers\User\ProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile/update', [\App\Http\Controllers\User\ProfileController::class, 'update'])->name('profile.update');;
+    Route::put('/profile/update', [\App\Http\Controllers\User\ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/photo', [\App\Http\Controllers\User\ProfileController::class, 'photo'])->name('profile.photo');
     Route::get('/profile/delete', [\App\Http\Controllers\User\ProfileController::class, 'delete'])->name('profile.delete');
-    Route::delete('/profile/destroy', [\App\Http\Controllers\User\ProfileController::class, 'destroy'])->name('profile.destroy');;
+    Route::delete('/profile/destroy', [\App\Http\Controllers\User\ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/files', [\App\Http\Controllers\User\FilesController::class, 'index'])->name('files');
     Route::get('/files/e/{code}', [\App\Http\Controllers\User\FilesController::class, 'edit'])->name('files.edit');

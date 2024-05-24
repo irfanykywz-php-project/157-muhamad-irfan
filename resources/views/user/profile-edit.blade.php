@@ -1,4 +1,4 @@
-<x-app-layout title="Edit Profile">
+<x-app-layout title="Edit Profile" turbofresh="true">
 
     <div class="container mt-2 mb-auto">
         <div class="row justify-content-center">
@@ -33,7 +33,7 @@
 
                     <div class="card-body row justify-content-center text-center">
                         <div class="col-12 col-md-4">
-                            <form action="{{ route('user.profile.update') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('user.profile.update') }}" method="POST">
                                 @csrf
 
                                 @method('put')
@@ -46,9 +46,11 @@
 
                                 <div class="my-3">
                                     <div>
-                                        <img class="rounded" width="75" src="{{ asset('assets/' . auth()->user()->photo) }}" alt="profile">
+                                        <img class="rounded" width="75" src="{{ auth()->user()->photoUrl(auth()->user()->photo) }}" alt="profile">
                                     </div>
-                                    <a class="btn btn-secondary my-1" href="javascript:;">Change Picture</a>
+                                    <a class="btn btn-secondary my-1" href="javascript:;"
+                                       data-bs-toggle="modal" data-bs-target="#photoModal"
+                                    >Change Picture</a>
                                 </div>
 
                                 <div class="mb-3">
@@ -91,5 +93,14 @@
             </div>
         </div>
     </div>
+
+    @include('user.profile-edit-photo')
+
+    @push('scripts')
+        @vite([
+            'resources/css/user/profile.css',
+            'resources/js/user/profile.js',
+        ])
+    @endpush
 
 </x-app-layout>
