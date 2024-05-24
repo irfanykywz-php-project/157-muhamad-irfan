@@ -16,44 +16,44 @@ class PaymentController extends Controller
     public function show(Request $request)
     {
 
-        $files_query = Payment::select([
-            'payment.id',
-            'payment.total',
-            'payment.method',
-            'payment.destination',
-            'payment.status',
-            'users.name as user'
-        ])
-            ->leftJoin('users', 'users.id', '=', 'payment.user_id');
+        $payment_query = Payment::select([
+                'payments.id',
+                'payments.total',
+                'payments.method',
+                'payments.destination',
+                'payments.status',
+                'users.name as user'
+            ])
+            ->leftJoin('users', 'users.id', '=', 'payments.user_id');
 
-        $totalNotFiltered = $files_query->count();
+        $totalNotFiltered = $payment_query->count();
 
 
         // search
         $search = $request->get('search');
         if (!empty($search)) {
             //dd($search);
-            $files_query->where('payment.user', 'like', '%'.$search.'%');
+            $payment_query->where('payments.user', 'like', '%'.$search.'%');
         }
 
         // sort & order
         $sort = $request->get('sort');
         $order = $request->get('order');
         if (isset($sort) AND isset($order)){
-            $files_query->orderBy($sort, $order);
+            $payment_query->orderBy($sort, $order);
         }
 
         // total after search
-        $total = $files_query->count();
+        $total = $payment_query->count();
 
         // offset & limit
         $offset = $request->get('offset');
         $limit = $request->get('limit');
         if (isset($offset) AND isset($limit)){
-            $files_query = $files_query->offset($offset)->limit($limit);
+            $payment_query = $payment_query->offset($offset)->limit($limit);
         }
 
-        $files = $files_query->get();
+        $files = $payment_query->get();
 
         return response()->json([
             'total' => $total,
@@ -62,8 +62,15 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function update()
+    public function update(Request $request)
     {
+        $ids = $request->post('ids');
+        $status = $request->post('status');
 
+        Payment::whereIn('id', $ids)->update(['status' => $status]);
+
+        return response()->json([
+            'status' => 'success'
+        ], 200);
     }
 }

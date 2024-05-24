@@ -12,14 +12,13 @@ class FileController extends Controller
     {
 
         $file = $file->where('code', $code)->with('user')->firstOrFail();
-        // dd($file->user);
+        //dd($file->user);
 
         // viewed increment
         $file->viewedIncrement();
 
         return view('file', [
             'file' => $file,
-            'user' => $file->user
         ]);
     }
 }

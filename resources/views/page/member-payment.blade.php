@@ -20,10 +20,10 @@
                                     <b>ID</b> : #{{ $pay->id }}
                                 </p>
                                 <p class="small mb-0">
-                                    <b>Name</b> : {{ $pay->user }}
+                                    <b>Name</b> : {{ $pay->user->name }}
                                 </p>
                                 <p class="small mb-0">
-                                    <b>Number</b> : {{ $pay->destination }}-{{ $pay->method }}
+                                    <b>Number</b> : {{ $pay->destinationHide($pay->destination) }}-{{ $pay->method }}
                                 </p>
                                 <p class="small mb-0">
                                     <b>Request Date</b> : {{ $pay->created_at }}

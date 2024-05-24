@@ -14,6 +14,8 @@ $table.bootstrapTable({
     // showPaginationSwitch: true,
     pageList: '[10, 25, 50, 100, all]',
     idField: 'id',
+    sortName: 'id',
+    sortOrder: 'DESC',
     responseHandler: (res) => {
         $.each(res.rows, function (i, row) {
             row.state = $.inArray(row.id, selections) !== -1
@@ -72,11 +74,29 @@ $table.on('check.bs.table uncheck.bs.table ' +
         console.log(selections);
     })
 
-$remove.click(function () {
-    // go ajax...
-    // console.log(ids);
+$(".update").click(function () {
     $.ajax({
         type:"put",
+        url: $update.data('url'),
+        data: {ids: selections, status:$(this).data('status')},
+        dataType:"json",
+        cache:false,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: (response) => {
+            $table.bootstrapTable('refresh');
+        },
+        error: (xhr, status, err) => {
+            alert(err + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    })
+
+})
+
+$remove.click(function () {
+    $.ajax({
+        type:"delete",
         url: $remove.data('url'),
         data: {ids: selections},
         dataType:"json",
@@ -92,6 +112,6 @@ $remove.click(function () {
         }
     })
 
-    // $remove.prop('disabled', true)
-    // $update.prop('disabled', true)
+    $remove.prop('disabled', true)
+    $update.prop('disabled', true)
 })

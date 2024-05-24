@@ -13,6 +13,8 @@ $table.bootstrapTable({
     // showPaginationSwitch: true,
     pageList: '[10, 25, 50, 100, all]',
     idField: 'id',
+    sortName: 'id',
+    sortOrder: 'DESC',
     responseHandler: (res) => {
         $.each(res.rows, function (i, row) {
             row.state = $.inArray(row.id, selections) !== -1
@@ -88,5 +90,5 @@ $remove.click(function () {
         }
     })
 
-    // $remove.prop('disabled', true)
+    $remove.prop('disabled', true)
 })

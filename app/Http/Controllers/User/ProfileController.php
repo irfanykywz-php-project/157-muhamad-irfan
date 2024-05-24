@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    public function index(User $user, Files $file)
+    public function index(User $user)
     {
 
-        $user = $user->where('id', Auth::user()->id)->firstOrFail();
+        $user = $user->where('id', Auth::user()->id)->with('files')->firstOrFail();
 
-        $total_download = Files::where('user_id', $user['id'])->sum('downloaded');
+        $total_download = $user->files->sum('downloaded');
         $total_earning = Download::where('owner_id', $user['id'])->sum('reveneu');
         $level = $this->level($total_download);
 

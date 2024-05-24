@@ -1,4 +1,4 @@
-<x-app-layout title="{{ $file['name'] }}">
+<x-app-layout title="{{ $file->name }}">
 
     <div class="container mt-2 mb-auto">
         <div class="row justify-content-center">
@@ -8,50 +8,50 @@
                     <div class="card-header rounded-0 bg-secondary">
                         <h1 class="fs-3 text-white">
                             <i class="bi bi-file"></i>
-                            {{ $file['name'] }}
+                            {{ $file->name }}
                         </h1>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <i class="bi bi-file-code"></i>
-                            {{ $file['ext'] }}
+                            {{ $file->ext }}
                         </li>
                         <li class="list-group-item">
                             <i class="bi bi-person"></i>
-                            <a class="text-decoration-none" href="{{ route('public.profile', $user['name']) }}">
-                                {{ $user['name'] }}
+                            <a class="text-decoration-none" href="{{ route('public.profile', $file->user->name) }}">
+                                {{ $file->user->name }}
                             </a>
                             on
-                            <a class="text-decoration-none" href="{{ route('category', $file['ext']) }}">
-                                {{ $file['ext'] }}
+                            <a class="text-decoration-none" href="{{ route('category', $file->ext) }}">
+                                {{ $file->ext }}
                             </a>
                         </li>
                         <li class="list-group-item">
                             <i class="bi bi-upload"></i>
-                            Uploaded: {{ $file['created_at'] }}
+                            Uploaded: {{ $file->created_at }}
                         </li>
                         <li class="list-group-item">
                             <i class="bi bi-download"></i>
-                            Downlaods: {{ $file['downloaded'] }}
+                            Downlaods: {{ $file->downloaded }}
                         </li>
                     </ul>
                 </div>
 
                 {{-- download button --}}
                 <div class="text-center mb-3">
-                    <a class="btn btn-primary" href="{{ route('download', $file['code']) }}" rel="noindex nofollow noreferrer">
-                        Download {{ $file['name'] }}
+                    <a class="btn btn-primary" href="{{ route('download', $file->code) }}" rel="noindex nofollow noreferrer">
+                        Download {{ $file->name }}
                     </a>
                 </div>
 
                 <div class="card rounded-0 mb-3">
                     <div class="card-body text-center">
                         <p>
-                            Download {{ $file['name'] }} by {{ $user['name'] }}
+                            Download {{ $file->name }} by {{ $file->user->name }}
                         </p>
                         <p>
-                            @if($file['description'])
-                                {{ $file['description'] }}
+                            @if($file->description)
+                                {{ $file->description }}
                             @else
                                 Sfile.mobi is a free file-sharing site. 5GB of free cloud server storage space, a high-speed, dedicated server for upload and download.
                             @endif
@@ -60,7 +60,7 @@
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <input type="text" class="form-control w-50" value="{{ url($file['code']) }}" readonly>
+                            <input type="text" class="form-control w-50" value="{{ url($file->code) }}" readonly>
                         </li>
 
                         <li class="list-group-item">
@@ -93,7 +93,7 @@
         <script>
             document.getElementById('share').addEventListener('click', function (){
                 navigator.share({
-                    title: '{{ $file['name'] }}',
+                    title: '{{ $file->name }}',
                     url: '{{ url()->current() }}',
                 })
             })

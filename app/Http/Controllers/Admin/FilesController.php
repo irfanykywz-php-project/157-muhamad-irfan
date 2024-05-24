@@ -81,6 +81,8 @@ class FilesController extends Controller
         // delete files
         Storage::delete($files_path);
 
-        return response()->json($request->all());
+        return response()->json([
+            'status' => 'success'
+        ], 200);
     }
 }

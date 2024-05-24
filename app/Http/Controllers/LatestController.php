@@ -11,10 +11,13 @@ class LatestController extends Controller
 {
     public function index(){
 
-        $files = Files::latest()
-            ->paginate(
-            $perPage = 8, $columns = ['name', 'size', 'ext', 'code', 'created_at'], $pageName = 'files'
-            );
+        $files = Files::select([
+            'name',
+            'size',
+            'ext',
+            'code',
+            'created_at'
+        ])->latest()->paginate(8);
 
         return view('latest', [
             'files' => $files

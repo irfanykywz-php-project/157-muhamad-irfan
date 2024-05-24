@@ -44,9 +44,9 @@
                         <div class="card-header rounded-0 bg-primary">
                             <h1 class="fs-5 text-white">
                                 @if($q = request()->get('q'))
-                                    {{ $files_count }} {{ $q }} Files
+                                    {{ $files->total() }} {{ $q }} Files
                                 @else
-                                    {{ $files_count }} Files
+                                    {{ $files->total() }} Files
                                 @endif
                             </h1>
                         </div>

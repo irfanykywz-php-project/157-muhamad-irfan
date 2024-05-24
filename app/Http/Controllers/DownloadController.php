@@ -23,10 +23,11 @@ class DownloadController extends Controller
         ]);
     }
 
-    public function download($code, Request $request, Files $file)
+    public function download($code_enc, Request $request)
     {
 
-        $file = $file->where('code', decrypt($code))->firstOrFail();
+        $code = decrypt($code_enc);
+        $file = Files::where('code', $code)->firstOrFail();
 
         /**
          * get reveneu by user level
@@ -37,10 +38,10 @@ class DownloadController extends Controller
          * must add more validation to prevent bot!
          */
         $is_valid = true;
-        // validate not in downloaded table today
+        // validate ip not in downloaded table today
+        // limit ip only valid for download 1 file/day
         $ip_exist = Download::where('created_at', '>=', Carbon::today())
-            ->where('owner_id', $file['user_id'])
-            ->where('file_id', $file['id'])
+            ->where('ip', $request->ip())
             ->count();
         if ($ip_exist > 0){
             $is_valid = false;
@@ -86,7 +87,7 @@ class DownloadController extends Controller
         if (Storage::fileExists($file['path'])){
             return Storage::download($file['path'], $file['name']);
         }else{
-            return view('download-error');
+            return view('download-error', ['code' => $code]);
         }
 
     }

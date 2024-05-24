@@ -16,13 +16,13 @@ class PaymentController extends Controller
 
         $user = $user->where('id', Auth::user()->id)->first();
 
-        $payment = Payment::latest()
-            ->where('user_id', $user['id'])
+        $payments = $user->payments()
+            ->latest()
             ->paginate(8);
 
         return view('user.payment', [
             'user' => $user,
-            'payment' => $payment
+            'payments' => $payments
         ]);
     }
 

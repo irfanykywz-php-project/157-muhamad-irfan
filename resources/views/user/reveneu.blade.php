@@ -24,7 +24,7 @@
                         <li class="list-group-item">
                             <div>
                                 Your Revenue:
-                                <b>Rp {{ ReadableNumber($user['reveneu'], '.') }}</b>
+                                <b>Rp {{ ReadableNumber(auth()->user()->reveneu, '.') }}</b>
                             </div>
                         </li>
 
@@ -48,9 +48,9 @@
                         @if(count($reveneu) > 0)
                             @foreach($reveneu as $rev)
                                 <tr>
-                                    <td>{{ ReadableDate($rev->date) }}</td>
-                                    <td>{{ ReadableHumanNumber($rev->total_download) }}</td>
-                                    <td>Rp {{ ReadableNumber($rev->total_reveneu, '.') }}</td>
+                                    <td>{{ $rev->date }}</td>
+                                    <td>{{ $rev->total_download }}</td>
+                                    <td>Rp {{ $rev->total_reveneu }}</td>
                                 </tr>
                             @endforeach
                         @else

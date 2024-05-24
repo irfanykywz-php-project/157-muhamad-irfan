@@ -13,18 +13,14 @@ class PageController extends Controller
         // when its a member-payment page
         // get data payment
         if ($page == 'member-payment'){
-            $data['payment'] = Payment::select([
-                'payment.id',
-                'payment.total',
-                'payment.method',
-                'payment.destination',
-                'payment.status',
-                'payment.created_at',
-                'payment.updated_at',
-                'users.name as user'
-            ])
-            ->leftJoin('users', 'users.id' ,'=', 'payment.user_id')
-            ->where('payment.status', 'success')->simplePaginate(8);
+
+            // optimize use with
+            // https://laravel.com/docs/11.x/eloquent-relationships#eager-loading
+            $data['payment'] = Payment::
+                with(['user'])
+                ->where('status', 'success')
+                ->simplePaginate(8);
+
         }
 
         try {

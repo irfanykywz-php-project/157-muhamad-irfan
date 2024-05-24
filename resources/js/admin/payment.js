@@ -1,5 +1,5 @@
 let $table = $('#table'),
-    $remove = $('#remove'),
+    $update = $('#update'),
     selections = [];
 
 $table.bootstrapTable({
@@ -13,6 +13,8 @@ $table.bootstrapTable({
     // showPaginationSwitch: true,
     pageList: '[10, 25, 50, 100, all]',
     idField: 'id',
+    sortName: 'id',
+    sortOrder: 'DESC',
     responseHandler: (res) => {
         $.each(res.rows, function (i, row) {
             row.state = $.inArray(row.id, selections) !== -1
@@ -26,7 +28,8 @@ $table.bootstrapTable({
         },
         {
             field: 'id',
-            title: '#'
+            title: '#',
+            sortable: true,
         },
         {
             field: 'user',
@@ -48,6 +51,7 @@ $table.bootstrapTable({
         {
             field: 'status',
             title: 'Status',
+            sortable: true,
             formatter: (row) => {
                 let type;
                 if (row == 'pending'){
@@ -72,7 +76,7 @@ function getIdSelections() {
 $table.on('check.bs.table uncheck.bs.table ' +
     'check-all.bs.table uncheck-all.bs.table',
     function () {
-        $remove.prop('disabled', !$table.bootstrapTable('getSelections').length)
+        $update.prop('disabled', !$table.bootstrapTable('getSelections').length)
 
         // save your data, here just save the current page
         selections = getIdSelections()
@@ -80,13 +84,11 @@ $table.on('check.bs.table uncheck.bs.table ' +
         console.log(selections);
     })
 
-$remove.click(function () {
-    // go ajax...
-    // console.log(ids);
+$(".update").click(function () {
     $.ajax({
         type:"put",
-        url: $remove.data('url'),
-        data: {ids: selections},
+        url: $update.data('url'),
+        data: {ids: selections, status:$(this).data('status')},
         dataType:"json",
         cache:false,
         headers: {
@@ -100,5 +102,4 @@ $remove.click(function () {
         }
     })
 
-    // $remove.prop('disabled', true)
 })

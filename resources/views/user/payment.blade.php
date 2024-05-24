@@ -54,12 +54,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @if(count($payment) > 0)
-                        @foreach($payment as $pay)
+                    @if(count($payments) > 0)
+                        @foreach($payments as $pay)
                             <tr>
                                 <td>{{ $pay->id }}</td>
-                                <td>{{ ReadableDate($pay->created_at) }}</td>
-                                <td>Rp {{ ReadableNumber($pay->total, '.') }}</td>
+                                <td>{{ $pay->created_at }}</td>
+                                <td>Rp {{ $pay->total }}</td>
                                 <td>{{ $pay->method }}</td>
                                 <td>{{ $pay->destination }}</td>
                                 <td>
@@ -91,9 +91,9 @@
                     </tbody>
                 </table>
 
-                @if($payment->hasPages())
+                @if($payments->hasPages())
                     <div class="my-3">
-                        {{ $payment->onEachSide(0)->links() }}
+                        {{ $payments->onEachSide(0)->links() }}
                     </div>
                 @endif
 

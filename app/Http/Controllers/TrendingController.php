@@ -9,11 +9,18 @@ use Illuminate\Support\Facades\DB;
 class TrendingController extends Controller
 {
     public function index(){
-        $files = Files::whereDate('created_at', '>', now()->subDays(7))
-            ->orderByRaw('CONVERT(viewed, SIGNED) DESC')
-            ->paginate(
-                $perPage = 8, $columns = ['name', 'size', 'ext', 'code', 'created_at'], $pageName = 'files'
-            );
+
+        $files = Files::select([
+                'name',
+                'size',
+                'ext',
+                'code',
+                'created_at'
+            ])
+            ->whereDate('created_at', '>', now()->subDays(7))
+            ->orderByRaw('viewed DESC')
+            //->orderByRaw('CONVERT(viewed, SIGNED) DESC')
+            ->paginate(8);
 
         return view('trending', [
             'files' => $files

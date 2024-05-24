@@ -11,13 +11,13 @@ class CategoryController extends Controller
     public function index($category)
     {
 
-        $files_query = Files::where('ext', '=', $category);
-
-        $files = $files_query
-            ->latest()
-            ->paginate(
-                $perPage = 8, $columns = ['name', 'size', 'ext', 'code', 'created_at', 'downloaded'], $pageName = 'page'
-            );
+        $files = Files::select([
+            'name',
+            'size',
+            'ext',
+            'code',
+            'created_at'
+        ])->where('ext', '=', $category)->latest()->paginate(8);
 
         return view('category', [
             'files' => $files

@@ -72,7 +72,7 @@ Route::middleware(['auth', 'auth.session' ,'role:user'])->name('user.')->group(f
 
 // user public page
 Route::get('/user/{name}', [\App\Http\Controllers\User\ProfilePublicController::class, 'index'])->name('public.profile');
-Route::get('/user/{name}/files', [\App\Http\Controllers\user\FilesPublicController::class, 'index'])->name('public.files');
+Route::get('/user/{name}/files', [\App\Http\Controllers\User\FilesPublicController::class, 'index'])->name('public.files');
 
 // file download
 Route::get('/download/{code}', [\App\Http\Controllers\DownloadController::class, 'index'])->name('download');

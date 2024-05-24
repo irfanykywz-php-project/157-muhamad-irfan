@@ -22,7 +22,7 @@ class FileSeeder extends Seeder
             $c_ext = $ext[array_rand($ext)];
 
             Files::create([
-                'user_id' => random_int(2 , 3),
+                'user_id' => random_int(2 , 100),
                 'name' => fake()->name() . '.' . $c_ext,
                 'ext' => $c_ext,
                 'size' => random_int(1024, 99999999),

@@ -15,11 +15,24 @@
 
                     <div class="card-body">
 
-                        <div id="toolbar">
-                            <button id="remove" class="btn btn-primary" disabled
+                        <div id="toolbar" class="d-flex gap-1">
+                            <div class="dropdown">
+                                <button
+                                    class="btn btn-primary dropdown-toggle"
+                                    type="button"
+                                    id="update"
+                                    data-bs-toggle="dropdown"
+                                    data-bs-auto-close="true"
+                                    aria-expanded="false" disabled
                                     data-url="{{ route('admin.payment.update') }}">
-                                <i class="bi bi-globe"></i> Update
-                            </button>
+                                    Update Status
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="update">
+                                    <li><div data-status="success" class="dropdown-item update">success</div></li>
+                                    <li><div data-status="reject" class="dropdown-item update">reject</div></li>
+                                    <li><div data-status="pending" class="dropdown-item update">pending</div></li>
+                                </ul>
+                            </div>
                         </div>
                         <table id="table"
                                data-url="{{ route('admin.payment.show') }}"

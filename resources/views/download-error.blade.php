@@ -12,8 +12,7 @@
                             File not Found!
                         </h3>
 
-                        <a class="text-decoration-none" href="{{ route('home') }}">Back to Home</a>
-
+                        <a class="text-decoration-none" href="{{ route('file', $code) }}">Back to File</a>
 
                     </div>
 

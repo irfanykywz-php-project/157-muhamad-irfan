@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 
 class ProfilePublicController extends Controller
 {
-    public function index($name)
+    public function index($name, User $user)
     {
 
-        $user = User::where('name', $name)->firstOrFail();
+        $user = $user->where('name', $name)->with('files')->firstOrFail();
 
-        $total_files = Files::where('user_id', $user['id'])->count();
-        $total_download = Files::where('user_id', $user['id'])->sum('downloaded');
+        $total_files = $user->files->count();
+        $total_download = $user->files->sum('downloaded');
         $level = $this->level($total_download);
 
         return view('user.profile-public', [

@@ -15,12 +15,24 @@
 
                     <div class="card-body">
 
-                        <div id="toolbar">
-                            <button id="update" class="btn btn-primary" disabled
+                        <div id="toolbar" class="d-flex gap-1">
+                            <div class="dropdown">
+                                <button
+                                    class="btn btn-primary dropdown-toggle"
+                                    type="button"
+                                    id="update"
+                                    data-bs-toggle="dropdown"
+                                    data-bs-auto-close="true"
+                                    aria-expanded="false" disabled
                                     data-url="{{ route('admin.user.update') }}">
-                                <i class="bi bi-globe"></i> Update Status
-                            </button>
-                            <button id="remove" class="btn btn-primary" disabled
+                                    Update Status
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="update">
+                                    <li><div data-status="active" class="dropdown-item update">active</div></li>
+                                    <li><div data-status="banned" class="dropdown-item update">banned</div></li>
+                                </ul>
+                            </div>
+                            <button id="remove" class="btn btn-danger" disabled
                                     data-url="{{ route('admin.user.destroy') }}">
                                 <i class="bi bi-trash"></i> Delete
                             </button>

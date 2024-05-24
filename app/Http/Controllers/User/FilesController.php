@@ -22,17 +22,20 @@ class FilesController extends Controller
             $files_query->where('name', 'like', '%'.$q.'%');
         }
 
-        $files_count = $files_query->get()->count();
-
         $files = $files_query
+            ->select([
+                'name',
+                'size',
+                'ext',
+                'code',
+                'created_at',
+                'downloaded'
+            ])
             ->latest()
-            ->paginate(
-                $perPage = 8, $columns = ['name', 'size', 'ext', 'code', 'created_at', 'downloaded'], $pageName = 'page'
-            );
+            ->paginate(8);
 
 
         return view('user.files', [
-            'files_count' => $files_count,
             'files'=> $files
         ]);
     }

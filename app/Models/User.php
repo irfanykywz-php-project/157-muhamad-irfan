@@ -3,13 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Concerns\HasRelationships;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRelationships;
 
     /**
      * The attributes that are mass assignable.
@@ -47,9 +49,17 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * relation
+     */
     public function payments()
     {
         return $this->hasMany(Payment::class, 'user_id');
+    }
+
+    public function files(): HasMany
+    {
+        return $this->hasMany(Files::class, 'user_id');
     }
 
     public function role($role_name)
