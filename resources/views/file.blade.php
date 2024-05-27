@@ -32,7 +32,7 @@
                         </li>
                         <li class="list-group-item">
                             <i class="bi bi-download"></i>
-                            Downlaods: {{ $file->downloaded }}
+                            Downloads: {{ $file->downloaded }}
                         </li>
                     </ul>
                 </div>

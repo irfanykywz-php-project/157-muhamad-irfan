@@ -16,7 +16,7 @@ class DashboardController extends Controller
         $total_files = Files::count();
         $total_payments = Payment::where('status', 'success')->sum('total');
         $payments_pending = Payment::where('status', 'pending')->count();
-        $total_user = User::count();
+        $total_user = User::whereNotIn('id', [1, 2])->count();
 
         return view('admin.dashboard', [
             'total_files' => $total_files,

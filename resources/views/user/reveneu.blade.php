@@ -24,7 +24,7 @@
                         <li class="list-group-item">
                             <div>
                                 Your Revenue:
-                                <b>Rp {{ ReadableNumber(auth()->user()->reveneu, '.') }}</b>
+                                <b>{{ auth()->user()->reveneu }}</b>
                             </div>
                         </li>
 

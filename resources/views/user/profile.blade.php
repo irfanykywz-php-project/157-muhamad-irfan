@@ -40,7 +40,7 @@
                         <li class="list-group-item">
                             <div>
                                 Your Revenue:
-                                <b>Rp {{ ReadableNumber($user['reveneu'], '.') }}</b>
+                                <b>{{ $user['reveneu'] }}</b>
                             </div>
                             <div>
                                 Sfile Level:

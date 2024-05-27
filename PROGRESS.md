@@ -19,4 +19,4 @@ Fitur :
   - User (100%)
   - Payment (100%)
 
-Total Progress : 92%
+Total Progress : 93%

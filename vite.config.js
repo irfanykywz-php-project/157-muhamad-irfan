@@ -12,6 +12,8 @@ export default defineConfig({
                 'resources/js/admin/files.js',
                 'resources/js/admin/payment.js',
                 'resources/js/admin/user.js',
+                'resources/css/user/profile.css',
+                'resources/js/user/profile.js',
             ],
             refresh: true,
         }),

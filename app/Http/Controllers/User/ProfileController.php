@@ -17,10 +17,12 @@ class ProfileController extends Controller
     public function index(User $user)
     {
 
-        $user = $user->where('id', Auth::user()->id)->with('files')->firstOrFail();
+        $user = $user->where('id', Auth::user()->id)
+            ->with('files')
+            ->with('downloads')->firstOrFail();
 
         $total_download = $user->files->sum('downloaded');
-        $total_earning = Download::where('owner_id', $user['id'])->sum('reveneu');
+        $total_earning = $user->downloads->sum('reveneu');
         $level = $this->level($total_download);
 
         return view('user.profile', [

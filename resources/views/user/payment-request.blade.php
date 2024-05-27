@@ -44,7 +44,7 @@
                     <div class="mb-3">
                         <label for="">
                             Total Payment
-                            (current revenue Rp {{ ReadableNumber(auth()->user()->reveneu, '.') }})
+                            (current revenue {{ auth()->user()->reveneu }})
                         </label>
                         <input class="form-control" type="text" name="total" value="{{ old('total') }}">
                         @error('total')

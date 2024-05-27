@@ -1,10 +1,17 @@
 # ChangeLog
+**25 Mei 2024**
+- fix payment user page
+- fix mutator user reveneu 
+- fix query total_earning on profile
+- fix register email unique validation
+
 **24 Mei 2024**
 - optimize model query
 - optimize files view split to component
 - admin user [status, delete]
 - admin payment [status]
 - admin dashboard [total user, total files, total payment, payment pending]
+- add js module [croppie]
 - profile edit photo upload & crop 
 
 **23 Mei 2024**

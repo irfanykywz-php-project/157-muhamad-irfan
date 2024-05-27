@@ -30,7 +30,7 @@
                         <li class="list-group-item">
                             <div>
                                 Your Revenue:
-                                <b>Rp {{ ReadableNumber($user['reveneu'], '.') }}</b>
+                                <b>{{ $user['reveneu'] }}</b>
                             </div>
                         </li>
 
@@ -59,7 +59,7 @@
                             <tr>
                                 <td>{{ $pay->id }}</td>
                                 <td>{{ $pay->created_at }}</td>
-                                <td>Rp {{ $pay->total }}</td>
+                                <td>{{ $pay->total }}</td>
                                 <td>{{ $pay->method }}</td>
                                 <td>{{ $pay->destination }}</td>
                                 <td>

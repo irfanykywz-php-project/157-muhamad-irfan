@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Pharaonic\Laravel\Readable\Readable;
 
 class User extends Authenticatable
 {
@@ -53,6 +54,13 @@ class User extends Authenticatable
     /**
      * mutation
      */
+    public function reveneu(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) => 'Rp '. ReadableNumber($value, '.')
+        );
+    }
+
     public function photoUrl($photo)
     {
         if (!str_contains($photo, 'photo/')){
@@ -64,6 +72,11 @@ class User extends Authenticatable
     /**
      * relation
      */
+    public function downloads()
+    {
+        return $this->hasMany(Download::class, 'owner_id');
+    }
+
     public function payments()
     {
         return $this->hasMany(Payment::class, 'user_id');

@@ -17,7 +17,7 @@ class RegisterController extends Controller
 
         $user = $request->validate([
             'name' => ['required', 'string', 'regex:/\w*$/', 'max:255', 'unique:users,name'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required'],
             'checklist' => ['required']
         ]);

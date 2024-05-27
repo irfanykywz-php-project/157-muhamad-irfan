@@ -30,6 +30,14 @@ class HomeController extends Controller
         // get file information
         $file = $request->file('file');
 
+
+        // not allowed mime
+        if (str_contains($file->getMimeType(), 'video')) {
+            return back()->withErrors([
+                'file' => 'Video not allowed!',
+            ]);
+        }
+
         // store file to local > files folder
 //        $path = $file->store('files');
         // store with Storage

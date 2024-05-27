@@ -40,6 +40,20 @@ pass: 1234
 ```
 
 # Preview
-![alt Preview](https://github.com/irfanykywz-php-project/157-muhamad-irfan/blob/main/preview.png?raw=true)
+<details>
+<summary>Home</summary> 
+
+![alt Preview](https://github.com/irfanykywz-php-project/157-muhamad-irfan/blob/main/preview.png?raw=true)  
+</details>
+
+<details>
+<summary>Profile</summary>
 
 ![alt Preview](https://github.com/irfanykywz-php-project/157-muhamad-irfan/blob/main/preview-panel.png?raw=true)
+</details>
+
+<details>
+<summary>Admin</summary>
+
+![alt Preview](https://github.com/irfanykywz-php-project/157-muhamad-irfan/blob/main/preview-admin.png?raw=true)
+</details>
