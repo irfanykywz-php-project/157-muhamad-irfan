@@ -24,6 +24,12 @@
                                </div>
                                @enderror
 
+                               @if(session('status'))
+                                   <div class="alert alert-success">
+                                       {{ session('status') }}
+                                   </div>
+                               @endif
+
                                @if(session('message'))
                                <div class="alert alert-success">
                                    {{ session('message') }}
@@ -61,13 +67,7 @@
                                    <button class="btn btn-primary w-100" type="submit">Login</button>
                                </div>
 
-{{--                               <div class="my-3 text-center">--}}
-{{--                                   OR--}}
-{{--                               </div>--}}
-
-{{--                               <div>--}}
-{{--                                   <img src="{{ asset('assets/Google-login-btn-r7.svg') }}" alt="google">--}}
-{{--                               </div>--}}
+                               <x-auth-google/>
 
                            </div>
 
@@ -79,7 +79,7 @@
                 <div class="mt-3 text-center">
 
                     <div class="mb-3">
-                        <a class="text-decoration-none" href="{{ route('forgot') }}">Forgot Passwords?</a>
+                        <a class="text-decoration-none" href="{{ route('password.request') }}">Forgot Passwords?</a>
                     </div>
 
                     <div class="">

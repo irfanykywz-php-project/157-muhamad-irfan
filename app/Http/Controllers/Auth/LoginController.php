@@ -33,7 +33,16 @@ class LoginController extends Controller
                 $request->session()->invalidate();
                 $request->session()->regenerateToken();
                 return back()->withErrors([
-                    'invalid' => 'guest cannot logined !'
+                    'invalid' => 'guest cannot logined!'
+                ]);
+            }
+
+            // if status is banned
+            if (Auth::user()->status == 'banned'){
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return back()->withErrors([
+                    'invalid' => 'account has banned!'
                 ]);
             }
 

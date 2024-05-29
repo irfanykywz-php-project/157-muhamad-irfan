@@ -14,10 +14,10 @@ class PaymentController extends Controller
     public function payment(User $user)
     {
 
-        $user = $user->where('id', Auth::user()->id)->first();
+        $user = $user->with('payments')->where('id', Auth::user()->id)->first();
 
         $payments = $user->payments()
-            ->latest()
+            ->orderBy('id', 'DESC')
             ->paginate(8);
 
         return view('user.payment', [
@@ -30,7 +30,7 @@ class PaymentController extends Controller
     {
 
         $request->validate([
-            'total' => ['required'],
+            'total' => ['required', 'integer'],
             'method' => ['required'],
             'destination' => ['required'],
         ]);
@@ -41,7 +41,7 @@ class PaymentController extends Controller
 
         // validate reveneu with total input
         $user = User::where('id', Auth::user()->id)->first();
-        if ($total > $user['reveneu']){
+        if ($total > $user->getRawOriginal('reveneu')){
             return redirect()->back()->withErrors([
                 'total' => 'Error! your revenue not enough !!!'
             ])->withInput();

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Download;
-use App\Models\Files;
+use App\Models\File;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -100,7 +100,7 @@ class ProfileController extends Controller
         $user->payments()->delete();
 
         // delete file
-        $files = Files::where('user_id', $user['id']);
+        $files = File::where('user_id', $user['id']);
         foreach ($files->get() as $file)
         {
             $file->downloads()->delete();

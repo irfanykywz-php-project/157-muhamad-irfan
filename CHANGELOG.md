@@ -1,4 +1,19 @@
 # ChangeLog
+**29 Mei 2024**
+- reset password
+- add php module [laravel/socialite]
+- login with google
+- optimize seeders
+- fix admin payment only update pending status + refund reveneu if rejected
+- file icon by type [image, archive, audio]
+- mutator user reveneu conflict with process, fix use original value with code ``getRawOriginal`` 
+- file download countdown
+
+**28 Mei 2024**
+- rename model files to file
+- add banned process on login
+- fill pages content
+
 **25 Mei 2024**
 - fix payment user page
 - fix mutator user reveneu 

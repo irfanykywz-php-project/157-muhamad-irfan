@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Files;
+use App\Models\File;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class FileController extends Controller
 {
-    public function index($code, Files $file)
+    public function index($code, File $file)
     {
 
         $file = $file->where('code', $code)->with('user')->firstOrFail();

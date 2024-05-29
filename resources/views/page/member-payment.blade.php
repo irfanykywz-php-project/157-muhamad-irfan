@@ -14,32 +14,38 @@
                     </div>
 
                     <ul class="list-group list-group-flush">
-                        @foreach($payment as $pay)
-                            <li class="list-group-item">
-                                <p class="small mb-0">
-                                    <b>ID</b> : #{{ $pay->id }}
-                                </p>
-                                <p class="small mb-0">
-                                    <b>Name</b> : {{ $pay->user->name }}
-                                </p>
-                                <p class="small mb-0">
-                                    <b>Number</b> : {{ $pay->destinationHide($pay->destination) }}-{{ $pay->method }}
-                                </p>
-                                <p class="small mb-0">
-                                    <b>Request Date</b> : {{ $pay->created_at }}
-                                </p>
-                                <p class="small mb-0">
-                                    <b>Amount</b> : {{ $pay->total }}
-                                </p>
-                                <p class="small mb-0">
-                                    <b>Status</b> : <span class="text-success">{{ $pay->status }}</span>
-                                </p>
-                                <p class="small mb-0">
-                                    <b>Last Updated</b> : {{ $pay->updated_at }}
-                                </p>
+                        @if(count($payment) > 0)
+                            @foreach($payment as $pay)
+                                <li class="list-group-item">
+                                    <p class="small mb-0">
+                                        <b>ID</b> : #{{ $pay->id }}
+                                    </p>
+                                    <p class="small mb-0">
+                                        <b>Name</b> : {{ $pay->user->name }}
+                                    </p>
+                                    <p class="small mb-0">
+                                        <b>Number</b> : {{ $pay->destinationHide($pay->destination) }}-{{ $pay->method }}
+                                    </p>
+                                    <p class="small mb-0">
+                                        <b>Request Date</b> : {{ $pay->created_at }}
+                                    </p>
+                                    <p class="small mb-0">
+                                        <b>Amount</b> : {{ $pay->total }}
+                                    </p>
+                                    <p class="small mb-0">
+                                        <b>Status</b> : <span class="text-success">{{ $pay->status }}</span>
+                                    </p>
+                                    <p class="small mb-0">
+                                        <b>Last Updated</b> : {{ $pay->updated_at }}
+                                    </p>
 
-                            </li>
-                        @endforeach
+                                </li>
+                            @endforeach
+                        @else
+                            <p class="my-3 fs-5 text-center">
+                                Payment data not available...
+                            </p>
+                        @endif
                     </ul>
 
                     @if($payment->hasPages())

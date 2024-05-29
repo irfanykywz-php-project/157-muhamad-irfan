@@ -33,7 +33,10 @@ $table.bootstrapTable({
         {
             field: 'name',
             title: 'Name',
-            sortable: true
+            sortable: true,
+            formatter: function (value, row){
+                return `<a class="text-decoration-none" target="_blank" href="/${row['code']}">${value}</a>`
+            }
         },
         {
             field: 'downloaded',

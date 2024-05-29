@@ -28,7 +28,17 @@ Route::middleware(['guest'])->group(function (){
     Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'authenticate']);
     Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('register');
     Route::post('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'process']);
-    Route::get('/forgot', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('forgot');
+    Route::get('/forgot-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'index'])->name('password.request');
+    Route::post('/forgot-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'process'])->name('password.email');
+
+    Route::get('/reset-password/{token}', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'index'])->name('password.reset');
+    Route::post('/reset-password', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'update'])->name('password.update');
+
+    Route::get('/auth/google-redirect', function (){
+        return \Laravel\Socialite\Facades\Socialite::driver('google')->redirect();
+    })->name('google.redirect');
+
+    Route::get('/auth/google-callback', [\App\Http\Controllers\Auth\GoogleController::class, 'authenticate'])->name('google.callback');
 });
 Route::get('/logout', [\App\Http\Controllers\Auth\LogoutController::class, 'process'])->name('logout');
 

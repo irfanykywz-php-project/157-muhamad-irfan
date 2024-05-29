@@ -11,15 +11,17 @@ Deskripi : aplikasi berbagi file
 - npm (10.5.0)
 
 # How to Run
-1. create .env file from .env.example
-   - open .env
+1. setup environment
+   - open .env file
    - set database configuration in ``DB_CONNECTION``
+   - set google auth in ``GOOGLE_CLIENT_ID`` & ``GOOGLE_CLIENT_SECRET``
+   - set mail in ``MAIL_MAILER``
 2. Open project in terminal
 3. Run command
    - npm install
    - npm run build
    - composer install
-   - php artisan migrate --seed
+   - php artisan migrate:fresh --seed
    - php artisan key:generate
    - php artisan serve
 4. Open http://localhost:8000

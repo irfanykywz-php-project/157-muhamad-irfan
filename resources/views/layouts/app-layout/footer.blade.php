@@ -20,10 +20,6 @@
     <li class="nav-item">
         <a class="nav-link px-1" href="{{ route('pages', 'contact') }}">Contact</a>
     </li>
-
-    <li class="nav-item">
-        <a class="nav-link px-1" href="{{ route('pages', '1212') }}">Contact</a>
-    </li>
 </ul>
 
 <div class="text-center border-top py-3">

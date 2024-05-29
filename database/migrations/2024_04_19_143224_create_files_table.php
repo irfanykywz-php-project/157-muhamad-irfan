@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('size');
             $table->string('ext');
             $table->string('path');
-            $table->integer('downloaded')->default(0);
-            $table->integer('viewed')->default(0);
+            $table->unsignedBigInteger('downloaded')->default(0);
+            $table->unsignedBigInteger('viewed')->default(0);
             $table->string('code')->unique()->index();
             $table->string('description')->nullable();
             $table->timestamps();

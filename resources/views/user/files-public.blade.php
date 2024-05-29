@@ -16,7 +16,7 @@
                             <li class="list-group-item">
 
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-inbox me-2"></i>
+                                    <x-file-icon :ext="$file->ext"/>
                                     <a class="fs- text-decoration-none" href="{{ route('file', $file->code) }}">
                                         {{ $file->name }}
                                     </a>

@@ -7,7 +7,7 @@
                 <div class="card rounded-0 mb-3">
                     <div class="card-header rounded-0 bg-secondary">
                         <h1 class="fs-3 text-white">
-                            <i class="bi bi-file"></i>
+                            <x-file-icon :ext="$file->ext"/>
                             {{ $file->name }}
                         </h1>
                     </div>
@@ -39,7 +39,10 @@
 
                 {{-- download button --}}
                 <div class="text-center mb-3">
-                    <a class="btn btn-primary" href="{{ route('download', $file->code) }}" rel="noindex nofollow noreferrer">
+                    <div class="countdown">
+                        <button class="btn btn-primary" disabled>Loading...</button>
+                    </div>
+                    <a class="btn btn-primary download-button d-none" href="{{ route('download', $file->code) }}" rel="noindex nofollow noreferrer">
                         Download {{ $file->name }}
                     </a>
                 </div>
@@ -90,7 +93,7 @@
     </div>
 
     @push('scripts')
-        <script>
+        <script type="module">
             document.getElementById('share').addEventListener('click', function (){
                 navigator.share({
                     title: '{{ $file->name }}',
@@ -101,6 +104,21 @@
             document.getElementById('comment').addEventListener('click', function (){
                 console.log('show comment...')
             })
+
+            // document.addEventListener('DOMContentLoaded', function (){
+            // })
+            let counter = 5,
+                downloadButton = $(".download-button"),
+                countDown = $(".countdown");
+            setInterval(function(){
+                console.log(counter);
+                $('button', countDown).html(`Loading...${counter}`);
+                counter--;
+                if (counter === 0) {
+                    countDown.addClass('d-none');
+                    downloadButton.removeClass('d-none');
+                }
+            }, 1000);
         </script>
     @endpush
 

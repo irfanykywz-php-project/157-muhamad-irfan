@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Download;
+use App\Models\File;
+use App\Models\Payment;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,22 +18,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-//        User::factory()->create([
-//            'name' => 'Test User',
-//            'email' => 'test@example.com',
-//        ]);
-
-        $this->call(RoleSeeder::class);
-
-        $this->call(UserSeeder::class);
-
-        User::factory(100)->create();
-
+        // seed default data
         $this->call([
-            FileSeeder::class,
-            DownloadSeeder::class,
+            RoleSeeder::class,
+            UserSeeder::class,
         ]);
 
+        // seed fake data
+        User::factory()->count(10)->create();
+        File::factory()->count(100)->create();
+        Download::factory()->count(100)->create();
+        Payment::factory()->count(100)->create();
 
     }
 }

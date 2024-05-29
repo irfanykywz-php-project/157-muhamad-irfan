@@ -1,6 +1,6 @@
 ## priority
-files download count down
-reset password
+???
 
 ## later
-file page comment ?   
+page upload for registered user > can multiple upload
+file page facebook comment ?   

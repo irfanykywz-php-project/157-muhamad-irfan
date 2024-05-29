@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -26,14 +27,13 @@ class PaymentController extends Controller
             ])
             ->leftJoin('users', 'users.id', '=', 'payments.user_id');
 
-        $totalNotFiltered = $payment_query->count();
-
+        $totalNotFiltered = $payment_query->get()->count();
 
         // search
         $search = $request->get('search');
         if (!empty($search)) {
             //dd($search);
-            $payment_query->where('payments.user', 'like', '%'.$search.'%');
+            $payment_query->where('users.name', 'like', '%'.$search.'%');
         }
 
         // sort & order
@@ -44,7 +44,7 @@ class PaymentController extends Controller
         }
 
         // total after search
-        $total = $payment_query->count();
+        $total = $payment_query->get()->count();
 
         // offset & limit
         $offset = $request->get('offset');
@@ -67,7 +67,21 @@ class PaymentController extends Controller
         $ids = $request->post('ids');
         $status = $request->post('status');
 
-        Payment::whereIn('id', $ids)->update(['status' => $status]);
+        $payments = Payment::query()->whereIn('id', $ids)->where('status', 'pending');
+
+        // read all selection
+        foreach ($payments->get() as $payment){
+
+            // when status is reject
+            // refund reveneu user
+            if ($status == 'reject') {
+                User::where('id', $payment['user_id'])->increment('reveneu', $payment->getRawOriginal('total'));
+            }
+
+            // update status
+            $payment->update(['status' => $status]);
+        }
+
 
         return response()->json([
             'status' => 'success'

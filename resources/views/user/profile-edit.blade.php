@@ -33,7 +33,7 @@
 
                     <div class="card-body row justify-content-center text-center">
                         <div class="col-12 col-md-4">
-                            <form action="{{ route('user.profile.update') }}" method="POST">
+                            <form action="{{ route('user.profile.update') }}" method="POST" data-turbo="false">
                                 @csrf
 
                                 @method('put')
@@ -46,7 +46,7 @@
 
                                 <div class="my-3">
                                     <div>
-                                        <img class="rounded" width="75" src="{{ auth()->user()->photoUrl(auth()->user()->photo) }}" alt="profile">
+                                        <img referrerpolicy="no-referrer" class="rounded" width="75" src="{{ auth()->user()->photoUrl(auth()->user()->photo) }}" alt="profile">
                                     </div>
                                     <a class="btn btn-secondary my-1" href="javascript:;"
                                        data-bs-toggle="modal" data-bs-target="#photoModal"

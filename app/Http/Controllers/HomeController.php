@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Files;
+use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rules\File;
 
 class HomeController extends Controller
 {
@@ -22,7 +21,7 @@ class HomeController extends Controller
         $request->validate([
             'file' => [
                 'required',
-                File::default()->max('100mb')
+                \Illuminate\Validation\Rules\File::default()->max('100mb')
             ],
             'description' => ['nullable', 'max:255']
         ]);
@@ -44,7 +43,7 @@ class HomeController extends Controller
         $path = Storage::disk('local')->putFile('files', $file);
 
         // save
-        Files::create([
+        File::create([
             'user_id' => Auth::user()?->role('user') ? Auth::id() : 2, // 2 = guest user
             'name' => $file->getClientOriginalName(),
             'ext' => $file->extension(),

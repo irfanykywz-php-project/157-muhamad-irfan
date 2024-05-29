@@ -16,7 +16,7 @@
                                     <label class="text-white">Select File</label>
                                     <input class="form-control" type="file" name="file">
                                     @error('file')
-                                    <small class="text-danger">{{ $errors->first('file')  }}</small>
+                                    <small class="text-warning">{{ $errors->first('file')  }}</small>
                                     @enderror
                                 </div>
                             </div>

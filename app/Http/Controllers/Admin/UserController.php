@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Files;
+use App\Models\File;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +22,7 @@ class UserController extends Controller
         $user_query = User::select([
             'users.id',
             'users.name',
+            'users.email',
             'users.status',
             DB::raw('COUNT(files.id) as total_files')
             ])

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Download;
-use App\Models\Files;
+use App\Models\File;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ class DownloadController extends Controller
     public function index($code)
     {
 
-        $file = Files::where('code', $code)->firstOrFail();
+        $file = File::where('code', $code)->firstOrFail();
 
         return view('download', [
             'file' => $file
@@ -27,7 +27,7 @@ class DownloadController extends Controller
     {
 
         $code = decrypt($code_enc);
-        $file = Files::where('code', $code)->firstOrFail();
+        $file = File::where('code', $code)->firstOrFail();
 
         /**
          * get reveneu by user level
@@ -65,7 +65,7 @@ class DownloadController extends Controller
         }
 
         if ($is_valid){
-            $total_download = Files::where('user_id', $file['user_id'])->sum('downloaded');
+            $total_download = File::where('user_id', $file['user_id'])->sum('downloaded');
             $rate = $this->level($total_download, true);
             $downloaded_minimum = config('level.downloaded_minimum');
             // get reveneu

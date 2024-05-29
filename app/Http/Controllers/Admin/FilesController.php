@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Files;
+use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -18,9 +18,10 @@ class FilesController extends Controller
     public function show(Request $request)
     {
 
-        $files_query = Files::select([
+        $files_query = File::select([
                 'files.id',
                 'files.name',
+                'files.code',
                 'files.downloaded',
                 'files.viewed',
                 'users.name as user'
@@ -68,7 +69,7 @@ class FilesController extends Controller
 
         $ids = $request->post('ids');
 
-        $files = Files::find($ids);
+        $files = File::find($ids);
 
         $files_path = [];
         foreach ($files as $file){

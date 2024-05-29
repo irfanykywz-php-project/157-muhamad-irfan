@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Files;
+use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,7 +11,7 @@ class SearchController extends Controller
     public function index(Request $request)
     {
 
-        $files_query = Files::select([
+        $files_query = File::select([
             'name',
             'size',
             'ext',

@@ -12,11 +12,11 @@
 
                 <div class="bg-primary d-flex align-items-center">
                     <div>
-                        <img class="p-3" width="75" src="{{ auth()->user()->photoUrl(auth()->user()->photo) }}" alt="user">
+                        <img referrerpolicy="no-referrer" class="p-3" width="75" src="{{ auth()->user()->photoUrl(auth()->user()->photo) }}" alt="user">
                     </div>
                     <div>
                         <h1 class="fs-3 text-white">
-                            {{ auth()->user()->name }} Panel
+                            {{ auth()->user()->name }}'s Panel
                         </h1>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                     <img width="30" src="{{ asset('assets/news.svg') }}" alt="news">
                     <p class="mb-0">
                         Rate dibagi berdasarkan Level User, Level user dihitung berdasarkan Total Download.
-                        <a href="{{ url('p/member-payment') }}">
+                        <a href="{{ route('pages', 'level-user') }}">
                             Baca Selengkapnya
                         </a>
                     </p>
@@ -62,13 +62,13 @@
                         </li>
                         <li class="list-group-item">
                             <a class="text-decoration-none" href=" {{ route('user.files') }}">
-                                <i class="text-dark bi bi-file"></i>
+                                <i class="text-dark bi bi-folder"></i>
                                 My Uploads
                             </a>
                         </li>
                         <li class="list-group-item">
                             <a class="text-decoration-none" href="{{ route('user.reveneu') }}">
-                                <i class="text-dark bi bi-cash"></i>
+                                <i class="text-dark bi bi-currency-dollar"></i>
                                 My Reveneu
                             </a>
                         </li>

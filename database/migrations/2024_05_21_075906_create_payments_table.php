@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->integer('total');
+            $table->unsignedBigInteger('total');
             $table->enum('method', ['Bank', 'Digital Wallet']);
             $table->string('destination');
             $table->enum('status', ['success', 'reject', 'pending']);

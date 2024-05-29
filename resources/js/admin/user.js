@@ -37,8 +37,13 @@ $table.bootstrapTable({
             sortable: true
         },
         {
+            field: 'email',
+            title: 'Email',
+            sortable: true
+        },
+        {
             field: 'total_files',
-            title: 'Total Files'
+            title: 'Total File'
         },
         {
             field: 'status',

@@ -21,7 +21,7 @@
                         </p>
 
                         <div class="text-center">
-                            <a class="btn btn-primary" href="{{ route('download.start', encrypt($file['code'])) }}" data-turbo="false">
+                            <a class="btn btn-primary download-button" href="{{ route('download.start', encrypt($file['code'])) }}" data-turbo="false">
                                 Download File ({{ $file['size'] }})
                             </a>
                         </div>
@@ -36,10 +36,16 @@
     </div>
 
     @push('scripts')
-        <script>
+        <script type="module">
+            let autoDownload = true;
+            $(".download-button").on('click', function (){
+                autoDownload = false
+            })
             setTimeout(function (){
-                window.location.href = '{{ route('download.start', encrypt($file['code'])) }}'
-            }, 3000)
+                if (autoDownload){
+                    window.location.href = '{{ route('download.start', encrypt($file['code'])) }}'
+                }
+            }, 2000)
         </script>
     @endpush
 

@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Files;
+use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class FilesController extends Controller
@@ -15,7 +13,7 @@ class FilesController extends Controller
     public function index(Request $request)
     {
 
-        $files_query = Files::where('user_id', Auth::id());
+        $files_query = File::where('user_id', Auth::id());
 
         // when search is exist
         if ($q = $request->get('q')) {
@@ -40,7 +38,7 @@ class FilesController extends Controller
         ]);
     }
 
-    public function edit($code, Files $file)
+    public function edit($code, File $file)
     {
 
         return view('user.file-edit', [
@@ -58,12 +56,12 @@ class FilesController extends Controller
 
         $file['name'] = $file['name'] . '.' . $request->post('ext');
 
-        Files::where('code', $code)->update($file);
+        File::where('code', $code)->update($file);
 
         return redirect()->route('user.files')->with('message', "{$file['name']} has edited!");
     }
 
-    public function delete($code, Files $file)
+    public function delete($code, File $file)
     {
 
         return view('user.file-delete', [
@@ -75,7 +73,7 @@ class FilesController extends Controller
     {
 
         // delete file
-        $file = Files::where('code', $code)->firstOrFail();
+        $file = File::where('code', $code)->firstOrFail();
         Storage::delete($file['path']);
 
         // delete database

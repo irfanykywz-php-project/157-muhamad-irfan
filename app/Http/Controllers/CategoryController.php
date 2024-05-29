@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Files;
+use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,7 +11,7 @@ class CategoryController extends Controller
     public function index($category)
     {
 
-        $files = Files::select([
+        $files = File::select([
             'name',
             'size',
             'ext',

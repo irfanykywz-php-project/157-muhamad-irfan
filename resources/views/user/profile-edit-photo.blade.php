@@ -11,7 +11,7 @@
             <div class="modal-body">
 
                <div class="py-3">
-                   <img class="photo" src="{{ auth()->user()->photoUrl(auth()->user()->photo) }}">
+                   <img referrerpolicy="no-referrer" class="photo" src="{{ auth()->user()->photoUrl(auth()->user()->photo) }}">
                </div>
 
                 <div class="mb-3">
