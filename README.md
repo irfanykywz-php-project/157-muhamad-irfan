@@ -16,6 +16,9 @@ Deskripi : aplikasi berbagi file
    - set database configuration in ``DB_CONNECTION``
    - set google auth in ``GOOGLE_CLIENT_ID`` & ``GOOGLE_CLIENT_SECRET``
    - set mail in ``MAIL_MAILER``
+   - set facebook app_id in ``FACEBOOK_APP_ID``
+   - set captcha key and secret in ``RECAPTCHA_SITE_KEY`` & ``RECAPTCHA_SECRET_KEY``
+
 2. Open project in terminal
 3. Run command
    - npm install
