@@ -16,10 +16,10 @@ class RegisterController extends Controller
     public function process(Request $request){
 
         $user = $request->validate([
+            'g-recaptcha-response' => ['recaptcha'],
             'name' => ['required', 'string', 'regex:/\w*$/', 'max:255', 'unique:users,name'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required'],
-            'checklist' => ['required']
         ]);
 
         User::create(array_merge($user, [

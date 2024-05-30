@@ -1,4 +1,13 @@
 # ChangeLog
+**30 Mei 2024**
+- add js module [resumablejs]
+- add php module [pion/laravel-chunk-upload]
+- file page facebook comment
+- add php module [biscolab/laravel-recaptcha]
+- register add google captcha
+- payment identity > add new column
+- different upload file guest & registered user
+
 **29 Mei 2024**
 - reset password
 - add php module [laravel/socialite]

@@ -34,7 +34,7 @@
     <!-- turbo -->
     <meta name="turbo-cache-control" content="no-cache">
     <meta name="turbo-prefetch" content="false">
-    @if(session('turbo-reload') or @isset($turbofresh))
+    @if(session('turbo-reload') or @isset($turbofresh) AND $turbofresh == 'true')
         <meta name="turbo-visit-control" content="reload">
     @endif
 
@@ -42,7 +42,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite([
+        'resources/css/app.css',
+        'resources/js/app.js',
+    ])
 
 </head>
 <body class="d-flex flex-column h-100">

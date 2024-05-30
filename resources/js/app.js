@@ -22,3 +22,20 @@ import * as Turbo from '@hotwired/turbo'
         Turbo.navigator.delegate.adapter.showProgressBar();
     });
 });
+
+/* disable form input & button when submitted */
+document.addEventListener("turbo:submit-start", ({ target }) => {
+    Turbo.navigator.delegate.adapter.showProgressBar();
+    for (const field of target.elements) {
+        field.disabled = true
+    }
+});
+
+document.addEventListener("turbo:render", function() {
+    var statusCode = Turbo.navigator.currentVisit.response.statusCode;
+
+    /* reload if page is 404 (prevent glithc bug in turbo) */
+    if (statusCode == 404) {
+        window.location.href = window.location.href;
+    }
+});

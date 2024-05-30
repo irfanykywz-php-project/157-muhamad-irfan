@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 
 class HomeController extends Controller
 {
@@ -21,14 +22,14 @@ class HomeController extends Controller
         $request->validate([
             'file' => [
                 'required',
-                \Illuminate\Validation\Rules\File::default()->max('100mb')
+                \Illuminate\Validation\Rules\File::default()->max('100mb'),
+                ''
             ],
             'description' => ['nullable', 'max:255']
         ]);
 
         // get file information
         $file = $request->file('file');
-
 
         // not allowed mime
         if (str_contains($file->getMimeType(), 'video')) {
@@ -56,5 +57,4 @@ class HomeController extends Controller
         // redirect to previous file uploaded
         return redirect()->to("/{$code}");
     }
-
 }

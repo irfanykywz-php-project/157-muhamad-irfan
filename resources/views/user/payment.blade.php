@@ -45,11 +45,11 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th style="background: #3f51b5;color: #fff;font-size: 12px">ID</th>
                         <th style="background: #3f51b5;color: #fff;font-size: 12px">Date</th>
                         <th style="background: #3f51b5;color: #fff;font-size: 12px">Amount</th>
                         <th style="background: #3f51b5;color: #fff;font-size: 12px">Method</th>
                         <th style="background: #3f51b5;color: #fff;font-size: 12px">Destination</th>
+                        <th style="background: #3f51b5;color: #fff;font-size: 12px">Identity</th>
                         <th style="background: #3f51b5;color: #fff;font-size: 12px">Status</th>
                     </tr>
                     </thead>
@@ -57,11 +57,11 @@
                     @if(count($payments) > 0)
                         @foreach($payments as $pay)
                             <tr>
-                                <td>{{ $pay->id }}</td>
                                 <td>{{ $pay->created_at }}</td>
                                 <td>{{ $pay->total }}</td>
                                 <td>{{ $pay->method }}</td>
                                 <td>{{ $pay->destination }}</td>
+                                <td>{{ $pay->identity }}</td>
                                 <td>
                                     @if($pay->status == 'pending')
                                         <span class="badge text-bg-warning">

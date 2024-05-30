@@ -1,4 +1,4 @@
-<x-app-layout title="{{ $file->name }}">
+<x-app-layout title="{{ $file->name }}" turbofresh="true">
 
     <div class="container mt-2 mb-auto">
         <div class="row justify-content-center">
@@ -40,7 +40,7 @@
                 {{-- download button --}}
                 <div class="text-center mb-3">
                     <div class="countdown">
-                        <button class="btn btn-primary" disabled>Loading...</button>
+                        <button class="btn btn-primary" disabled>Scanning files...</button>
                     </div>
                     <a class="btn btn-primary download-button d-none" href="{{ route('download', $file->code) }}" rel="noindex nofollow noreferrer">
                         Download {{ $file->name }}
@@ -81,7 +81,9 @@
                         </li>
 
                         <li class="list-group-item">
-                            <a id="comment" class="text-decoration-none" href="javascript:;">Show Comments</a>
+                            <a id="showComments" data-appi class="text-decoration-none" href="javascript:;">Show Comments</a>
+                            <div id="fb-root"></div>
+                            <div id="comments" class="fb-comments" data-href="{{ url()->current() }}" data-appid="{{ env('FACEBOOK_APP_ID', 'null') }}" data-numposts="5" width="100%" data-colorscheme="light"></div>
                         </li>
                     </ul>
 
@@ -93,33 +95,9 @@
     </div>
 
     @push('scripts')
-        <script type="module">
-            document.getElementById('share').addEventListener('click', function (){
-                navigator.share({
-                    title: '{{ $file->name }}',
-                    url: '{{ url()->current() }}',
-                })
-            })
-
-            document.getElementById('comment').addEventListener('click', function (){
-                console.log('show comment...')
-            })
-
-            // document.addEventListener('DOMContentLoaded', function (){
-            // })
-            let counter = 5,
-                downloadButton = $(".download-button"),
-                countDown = $(".countdown");
-            setInterval(function(){
-                console.log(counter);
-                $('button', countDown).html(`Loading...${counter}`);
-                counter--;
-                if (counter === 0) {
-                    countDown.addClass('d-none');
-                    downloadButton.removeClass('d-none');
-                }
-            }, 1000);
-        </script>
+        @vite([
+            'resources/js/file.js',
+        ])
     @endpush
 
 </x-app-layout>

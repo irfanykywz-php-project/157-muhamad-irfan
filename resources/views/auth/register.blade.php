@@ -46,13 +46,13 @@
                                 </div>
 
                                 <div class="mb-3 text-center">
-                                    <input class="form-check-input" type="checkbox" name="checklist" id="checklist">
-                                    <label for="checklist">
-                                        I'm not a robot
-                                    </label>
-                                    @error('checklist')
+
+                                    <!-- Google Recaptcha -->
+                                    {!! htmlFormSnippet() !!}
+
+                                    @error('g-recaptcha-response')
                                     <span class="form-text text-danger d-block">
-                                        {{ $errors->first('checklist')  }}
+                                        captcha not solved!
                                     </span>
                                     @enderror
                                 </div>
@@ -88,5 +88,9 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        {!! htmlScriptTagJsApi() !!}
+    @endpush
 
 </x-app-layout>

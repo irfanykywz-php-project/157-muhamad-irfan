@@ -22,6 +22,7 @@ class PaymentController extends Controller
                 'payments.total',
                 'payments.method',
                 'payments.destination',
+                'payments.identity',
                 'payments.status',
                 'users.name as user'
             ])

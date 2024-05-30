@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('total');
-            $table->enum('method', ['Bank', 'Digital Wallet']);
+            $table->string('method');
             $table->string('destination');
+            $table->string('identity');
             $table->enum('status', ['success', 'reject', 'pending']);
             $table->timestamps();
 

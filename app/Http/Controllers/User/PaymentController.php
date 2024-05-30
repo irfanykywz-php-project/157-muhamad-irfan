@@ -33,17 +33,46 @@ class PaymentController extends Controller
             'total' => ['required', 'integer'],
             'method' => ['required'],
             'destination' => ['required'],
+            'identity' => ['required'],
         ]);
 
         $total = $request->post('total');
         $method = $request->post('method');
         $destination = $request->post('destination');
+        $identity = $request->post('identity');
 
-        // validate reveneu with total input
+        // check user reveneu
         $user = User::where('id', Auth::user()->id)->first();
-        if ($total > $user->getRawOriginal('reveneu')){
+        $user_reveneu = $user->getRawOriginal('reveneu');
+        if ($total > $user_reveneu){
             return redirect()->back()->withErrors([
                 'total' => 'Error! your revenue not enough !!!'
+            ])->withInput();
+        }
+
+        // check minimum by method type
+        if (str_contains(strtolower($method), 'wallet')){
+            if ($total < 6000){
+                return redirect()->back()->withErrors([
+                    'total' => 'Minimum Payment Digital Wallet Rp 6.000'
+                ])->withInput();
+            }
+        }elseif (str_contains(strtolower($method), 'pulsa')){
+            if ($total < 6000){
+                return redirect()->back()->withErrors([
+                    'total' => 'Minimum Payment Pulsa Rp 6.000'
+                ])->withInput();
+            }
+        }elseif (str_contains(strtolower($method), 'bank')){
+            if ($total < 100000){
+                return redirect()->back()->withErrors([
+                    'total' => 'Minimum Payment Bank Transfer Rp 100.000'
+                ])->withInput();
+            }
+        }else{
+            // method not recognize show error
+            return redirect()->back()->withErrors([
+                'method' => 'Error! method not valid, please insert keyword [pulsa/wallet/bank] !!!'
             ])->withInput();
         }
 
@@ -53,6 +82,7 @@ class PaymentController extends Controller
             'total' => $total,
             'method' => $method,
             'destination' => $destination,
+            'identity' => $identity,
             'status' => 'pending'
         ]);
 

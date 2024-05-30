@@ -1,6 +1,6 @@
 ## priority
-???
+upload file chunk and progressbar
+
 
 ## later
-page upload for registered user > can multiple upload
-file page facebook comment ?   
+???

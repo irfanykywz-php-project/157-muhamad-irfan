@@ -17,7 +17,8 @@ class TrendingController extends Controller
                 'code',
                 'created_at'
             ])
-            ->whereDate('created_at', '>', now()->subDays(7))
+            ->whereDate('created_at', '>', now()->subDays(1)) // get file 3 days ago
+            ->orderByRaw('downloaded DESC')
             ->orderByRaw('viewed DESC')
             //->orderByRaw('CONVERT(viewed, SIGNED) DESC')
             ->paginate(8);

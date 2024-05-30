@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 // home
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // upload
-Route::post('/upload', [\App\Http\Controllers\HomeController::class, 'upload'])->name('upload');
+Route::post('/upload', [\App\Http\Controllers\UploadController::class, 'upload'])->name('upload');
+Route::post('/upload-guest', [\App\Http\Controllers\HomeController::class, 'upload'])->name('upload.guest');
 
 // latest
 Route::get('/latest', [\App\Http\Controllers\LatestController::class, 'index'])->name('latest');

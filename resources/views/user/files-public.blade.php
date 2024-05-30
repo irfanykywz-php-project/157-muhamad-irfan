@@ -12,20 +12,25 @@
                     </div>
                     <ul class="list-group list-group-flush">
 
-                        @foreach($files as $file)
-                            <li class="list-group-item">
+                        @if(count($files) > 0)
+                            @foreach($files as $file)
+                                <li class="list-group-item">
 
-                                <div class="d-flex align-items-center">
-                                    <x-file-icon :ext="$file->ext"/>
-                                    <a class="fs- text-decoration-none" href="{{ route('file', $file->code) }}">
-                                        {{ $file->name }}
-                                    </a>
-                                    <span class="ps-1">({{ $file->size }})</span>
-                                </div>
+                                    <div class="d-flex align-items-center">
+                                        <x-file-icon :ext="$file->ext"/>
+                                        <a class="fs- text-decoration-none" href="{{ route('file', $file->code) }}">
+                                            {{ $file->name }}
+                                        </a>
+                                        <span class="ps-1">({{ $file->size }})</span>
+                                    </div>
 
-                            </li>
-                        @endforeach
-
+                                </li>
+                            @endforeach
+                        @else
+                            <p class="my-3 fs-5 text-center">
+                                Files data not available...
+                            </p>
+                        @endif
 
                     </ul>
                     @if($files->hasPages())

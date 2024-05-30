@@ -20,6 +20,7 @@ class Payment extends Model
         'total',
         'method',
         'destination',
+        'identity',
         'status',
     ];
 

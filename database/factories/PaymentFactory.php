@@ -20,7 +20,23 @@ class PaymentFactory extends Factory
 
         $user = User::query()->whereNot('id', [2, 3])->where('reveneu', '>', '0')->get()->random();
 
-        $method = ['Bank', 'Digital Wallet'];
+        $method = [
+            'Digital Wallet - OVO',
+            'Digital Wallet - Gopay',
+            'Digital Wallet - ShopeePay',
+            'Digital Wallet - DANA',
+            'Pulsa - Telkomsel',
+            'Pulsa - XL',
+            'Pulsa - Axis',
+            'Pulsa - Three',
+            'Pulsa - Indosat',
+            'Pulsa - SmartFren',
+            'Bank - BCA',
+            'Bank - BRI',
+            'Bank - BNI',
+            'Bank - Mandiri',
+            'Bank - BTPN',
+        ];
         $method_rand = $method[array_rand($method)];
 
         $status = ['pending', 'reject', 'success'];
@@ -31,6 +47,7 @@ class PaymentFactory extends Factory
             'total' => random_int(5000, 100000),
             'method' => $method_rand,
             'destination' => fake()->phoneNumber(),
+            'identity' => fake()->name(),
             'status' => $status_rand
         ];
     }

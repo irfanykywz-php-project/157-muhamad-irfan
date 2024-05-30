@@ -45,6 +45,10 @@ $table.bootstrapTable({
             title: 'Destination',
         },
         {
+            field: 'identity',
+            title: 'Identity',
+        },
+        {
             field: 'total',
             title: 'Total',
         },
